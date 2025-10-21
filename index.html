@@ -715,7 +715,8 @@
             background-color: var(--secondary-black);
             color: var(--white);
             text-align: center;
-            padding: 1rem 1rem;
+            padding: 0.5rem 1rem;
+            /* Further reduced padding */
             margin-top: 2rem;
             font-size: 0.9em;
         }
@@ -1250,7 +1251,7 @@
     </section>
 
     <footer>
-        <p>© 2023 Grilli KIPSA. Kaikki oikeudet pidätetään.</p>
+        <p>&copy; 2025 Grilli Kipsa.</p>
     </footer>
 
     <script>
@@ -1313,6 +1314,7 @@
                     }
                 });
             });
+
             // --- Active Nav Link Highlighting Logic ---
             const sections = document.querySelectorAll('section[id]');
             // Offset for determining active section (slightly more than header height)
@@ -1356,6 +1358,7 @@
 
             // Initial call to highlight the correct link on page load
             highlightNavLink();
+
         });
     </script>
 </body>
