@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grilli KIPSA</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+
+        :root {
+            --primary-red: #cc0000;
+            --primary-red-readable: #a00000;
+            --secondary-black: #222222;
+            --light-grey: #f8f8f8;
+            /* Main body background */
+            --dark-grey: #555555;
+            --white: #ffffff;
+            /* Section background */
+            --text-color: #333333;
+            --menu-bg: #fdfdfd;
+            --menu-border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-grey);
+        }
+
+        header {
+            background-color: var(--secondary-black);
+            color: var(--white);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Allow nav to wrap on small screens */
+            gap: 1.5rem 2rem;
+            /* Add row gap */
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        .hero {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                /* Darker overlay */
+                url('./img/Kipsa.jpg');
+            /* Base scene image */
+            background-size: auto, cover;
+            background-position: center, center;
+            background-repeat: no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 2rem;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            border-bottom: 4px solid var(--primary-red-readable);
+        }
+
+        .hero-logo {
+            display: none;
+        }
+
+        .hero .hero-logo-text {
+            font-family: 'Oswald', sans-serif;
+            /* Keep Oswald for main text */
+            font-size: 4.5em;
+            /* Same large size */
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            /* Default color for the whole div, overridden by spans */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: none;
+            padding-bottom: 0;
+            display: flex;
+            /* Use flexbox to align "Grilli" and "KIPSA" */
+            flex-direction: column;
+            /* Stack them vertically */
+            align-items: center;
+            /* Center horizontally */
+            line-height: 0.9;
+            /* Reduce line height between the two parts */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            /* Keep text shadow */
+        }
+
+        .hero .hero-logo-text .grilli-part {
+            color: var(--primary-red);
+            /* Red color for "Grilli" */
+            font-size: 0.6em;
+            /* Smaller size for "Grilli" */
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: -0.5rem;
+            /* Pull "Grilli" closer to "KIPSA" */
+        }
+
+        .hero .hero-logo-text .kipsa-part {
+            color: var(--white);
+            /* White color for "KIPSA" */
+            font-size: 1.1em;
+            /* Larger size for "KIPSA" */
+            font-weight: 700;
+            letter-spacing: 3px;
+            position: relative;
+            top: 0;
+            /* Adjust vertical position if needed */
+        }
+
+        .hero h1 {
+            /* This rule is now mostly superseded by .hero-logo-text for the main title */
+            display: none;
+            /* Hide the old H1 */
+        }
+
+        .hero p {
+            font-size: 1.6em;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 400;
+            margin-top: 1rem;
+        }
+
+        section {
+            padding: 1.5rem 2rem 2.5rem;
+            /* Reduced top padding */
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: var(--white);
+            margin-bottom: 2rem;
+            /* Reduced margin between sections */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        #menu {
+            margin-top: 3rem;
+            /* Added space between hero and menu */
+        }
+
+        h2 {
+            font-family: 'Lora', serif;
+            color: var(--secondary-black);
+            /* Changed default h2 color to black */
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-black);
+            /* Changed default h2 underline to black */
+        }
+
+        /* Menu Section Styling */
+        #menu {
+            background-color: var(--menu-bg);
+            /* Padding is now controlled by the main 'section' rule */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--menu-border);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        #menu h2 {
+            /* Targeting Hinnasto specifically */
+            width: 100%;
+            margin-bottom: 2.5rem;
+            color: var(--secondary-black);
+            /* Ensure it's black */
+        }
+
+        #menu h2::after {
+            background-color: var(--secondary-black);
+            /* Ensure underline is black */
+        }
+
+        .menu-column {
+            flex: 1;
+            min-width: 280px;
+            padding: 1rem 1.5rem;
+            /* Reduced internal padding slightly */
+            border-right: 1px solid var(--menu-border);
+            /* Lighter solid border */
+        }
+
+        .menu-column:last-of-type {
+            border-right: none;
+        }
+
+        .menu-category {
+            margin-bottom: 2.5rem;
+            /* Increased space between categories */
+        }
+
+        .menu-category h3 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            color: var(--primary-red-readable);
+            /* Keep category headers red */
+            font-size: 1.8em;
+            margin-bottom: 1.5rem;
+            /* Increased space below header */
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--primary-red-readable);
+            /* Keep category underlines red */
+            padding-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 1.2rem;
+            /* Increased space between items */
+            padding-bottom: 0.8rem;
+            /* Increased space below item before line */
+            font-size: 1em;
+            /* Slightly larger base font */
+            position: relative;
+            border-bottom: 1px solid var(--menu-border);
+            /* Lighter solid line */
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item::after {
+            /* Remove the pseudo element border */
+            display: none;
+        }
+
+        .item-main {
+            /* Wrapper for item name and potentially its price if no sizes */
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            width: 100%;
+            margin-bottom: 0.4rem;
+            /* Adjusted space */
+        }
+
+        .item-name {
+            color: var(--text-color);
+            padding-left: 0;
+            font-weight: 600;
+            /* Bolder item name */
+        }
+
+        .item-description {
+            display: none;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--primary-red-readable);
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+
+        .size-options {
+            margin-left: 1.5rem;
+            /* Indent size options */
+            font-size: 0.9em;
+            /* Slightly smaller text */
+        }
+
+        .size-options span {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.2rem;
+            /* Slightly more space */
+        }
+
+        .size-options .size-name {
+            color: var(--dark-grey);
+            font-style: italic;
+        }
+
+        .size-options .size-price {
+            font-weight: 600;
+            color: var(--primary-red-readable);
+            /* Red price for sizes */
+        }
+
+        /* Lunch Deals Section Styling */
+        #lunch-deals {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0;
+            border: 4px solid var(--primary-red);
+            border-radius: 0;
+            box-shadow: none;
+            background-color: var(--white);
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .lunch-title {
+            font-family: 'Oswald', sans-serif;
+            color: var(--secondary-black);
+            font-size: 2.2em;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 1.5rem;
+            /* Restored full padding */
+            background-color: #f0f0f0;
+            border-bottom: 1px solid var(--menu-border);
+            margin-top: 0;
+            margin-bottom: 0;
+            position: relative;
+            /* Keep for ::after */
+        }
+
+        .lunch-title::after {
+            display: none;
+            /* Hide the default h2 red underline */
+        }
+
+        .lunch-items {
+            padding: 1.5rem 2rem;
+        }
+
+        .lunch-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            /* Aligns price and name-box to the bottom */
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dotted var(--dark-grey);
+            font-size: 1.1em;
+            line-height: 1.2;
+        }
+
+        /* wrapper for item name and detail */
+        .item-name-box {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.3;
+            /* Tighter line height for the two lines */
+        }
+
+        .lunch-item .item-name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .lunch-item .item-detail {
+            font-size: 0.8em;
+            font-weight: 400;
+            color: var(--dark-grey);
+            margin-left: 0;
+            /* reset margin */
+            white-space: nowrap;
+        }
+
+        .lunch-item .item-price {
+            font-weight: 700;
+            color: var(--secondary-black);
+            font-size: 1.2em;
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
+
+        .lunch-special-note {
+            font-size: 0.95em;
+            color: var(--primary-red-readable);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            padding: 0 2rem 1rem;
+            /* Added bottom padding */
+            text-align: center;
+        }
+
+        /* Special Deal Section */
+        #specials {
+            max-width: 1200px;
+            /* Full width like other sections */
+            margin: 2rem auto;
+            /* Spacing */
+            padding: 1.5rem 2rem 2.5rem;
+            /* Reduced top padding */
+            border: none;
+            /* No border on the section container */
+            box-shadow: none;
+            background-color: var(--light-grey);
+            /* Match body background for contrast */
+            text-align: center;
+        }
+
+        #specials h2 {
+            /* Targeting Ateriat specifically */
+            color: var(--secondary-black);
+        }
+
+        #specials h2::after {
+            background-color: var(--secondary-black);
+        }
+
+
+        .specials-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows wrapping on small screens */
+            justify-content: center;
+            /* Center the cards */
+            gap: 2rem;
+            /* Space between cards */
+        }
+
+        .special-item-card {
+            flex: 1;
+            /* Allow cards to grow */
+            min-width: 260px;
+            /* Min width before wrapping */
+            max-width: 300px;
+            /* Max width for each card */
+            border: 2px solid var(--primary-red);
+            border-radius: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
+            overflow: hidden;
+            /* Important for image */
+            text-align: center;
+            display: flex;
+            /* Use flex to make cards same height */
+            flex-direction: column;
+            /* Stack content vertically */
+        }
+
+        .special-image {
+            width: 100%;
+            height: 180px;
+            /* Fixed height for consistency */
+            overflow: hidden;
+            /* Hide parts of image that don't fit */
+            background-color: var(--light-grey);
+            /* Placeholder background */
+        }
+
+        .special-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Scale image to cover the area */
+            display: block;
+            /* Remove extra space below image */
+        }
+
+
+        .special-content {
+            padding: 1.5rem 2rem 2rem 2rem;
+            /* Padding for the content */
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            /* Make content area grow to fill space */
+        }
+
+        .special-content h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8em;
+            /* Slightly smaller for card */
+            font-weight: 700;
+            color: var(--secondary-black);
+            line-height: 1.2;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .special-ingredients {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+            text-align: left;
+            font-size: 1em;
+            /* Smaller font for ingredients */
+            font-weight: 600;
+            color: var(--text-color);
+            display: inline-block;
+            flex-grow: 1;
+            /* Pushes price to the bottom */
+        }
+
+        .special-ingredients li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .special-ingredients li::before {
+            content: '-';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: 700;
+            color: var(--secondary-black);
+        }
+
+        .special-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5em;
+            /* Big price */
+            font-weight: 700;
+            color: var(--secondary-black);
+            line-height: 1;
+            margin-top: auto;
+            /* Pushes price to bottom */
+        }
+
+
+        /* About Section */
+        #about {
+            background-color: var(--white);
+        }
+
+        #about h2 {
+            /* Targeting Meistä specifically */
+            color: var(--secondary-black);
+        }
+
+        #about h2::after {
+            background-color: var(--secondary-black);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Section (Small Box) */
+        #contact {
+            max-width: 400px;
+            padding: 1.5rem 2.5rem 2.5rem;
+            /* Reduced top padding */
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background-color: var(--white);
+        }
+
+        #contact h2 {
+            font-size: 2em;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-black);
+        }
+
+        #contact h2::after {
+            background-color: var(--secondary-black);
+        }
+
+        .contact-info p {
+            margin-bottom: 0.8rem;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+
+        .opening-hours p {
+            margin-bottom: 0.3rem;
+            /* Tighter spacing for hours */
+            line-height: 1.3;
+        }
+
+        .opening-hours strong {
+            /* Style for the main label */
+            display: block;
+            /* Put label on its own line */
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info strong {
+            color: var(--primary-red-readable);
+        }
+
+        .contact-info a {
+            color: var(--primary-red-readable);
+            text-decoration: none;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-social-icon {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .contact-social-icon a {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-social-icon a:hover {
+            transform: scale(1.1);
+        }
+
+        .contact-social-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: #1877F2;
+            /* Facebook blue */
+        }
+
+        .map-container {
+            margin-top: 2rem;
+            /* Space above map */
+            border-radius: 8px;
+            /* Optional rounded corners */
+            overflow: hidden;
+            /* Ensure iframe respects border-radius */
+        }
+
+        .map-container iframe {
+            display: block;
+            /* Remove extra space below iframe */
+            width: 100%;
+            /* Make map responsive */
+            max-width: 400px;
+            /* Match iframe width attribute */
+            height: 300px;
+            /* Match iframe height attribute */
+            border: 0;
+            /* Remove default iframe border */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        footer {
+            background-color: var(--secondary-black);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem 1rem;
+            margin-top: 2rem;
+            font-size: 0.9em;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            #menu .menu-column {
+                flex: 1 1 45%;
+                border-right: none;
+            }
+
+            #menu .menu-column:nth-child(2n-1) {
+                border-right: 1px solid var(--menu-border);
+                /* Lighter solid border */
+            }
+
+            #menu-column:last-of-type {
+                border-right: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero h1 {
+                /* Keep this for smaller screens if we decide to re-enable it */
+                font-size: 3em;
+            }
+
+            .hero .hero-logo-text {
+                /* Adjust font sizes for mobile */
+                font-size: 3em;
+            }
+
+            .hero .hero-logo-text .grilli-part {
+                font-size: 0.65em;
+            }
+
+            .hero .hero-logo-text .kipsa-part {
+                font-size: 1.1em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            nav ul {
+                gap: 1rem;
+                /* Tighter gap for wrapped nav */
+            }
+
+            section {
+                padding: 1.5rem 1.5rem 2rem;
+                /* Reduced padding on mobile */
+            }
+
+            h2 {
+                font-size: 2.2em;
+            }
+
+            #menu {
+                flex-direction: column;
+                align-items: stretch;
+                /* Fixes left-alignment */
+            }
+
+            .menu-column {
+                min-width: unset;
+                border-right: none;
+                border-bottom: 1px solid var(--menu-border);
+                /* Lighter solid border */
+                padding-left: 0.5rem;
+                /* Less padding in mobile columns */
+                padding-right: 0.5rem;
+            }
+
+            .menu-column:last-child {
+                border-bottom: none;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            #contact {
+                max-width: 90%;
+            }
+
+            .lunch-title {
+                font-size: 1.8em;
+                padding: 1rem;
+            }
+
+            .lunch-items {
+                padding: 1rem 1.5rem;
+            }
+
+            .lunch-item {
+                font-size: 1em;
+            }
+
+            .lunch-item .item-price {
+                font-size: 1.1em;
+            }
+
+            .lunch-special-note {
+                font-size: 0.9em;
+                padding: 0 1.5rem 1.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero .hero-logo-text {
+                /* Further adjust font sizes for very small mobile */
+                font-size: 2.5em;
+            }
+
+            .hero .hero-logo-text .grilli-part {
+                font-size: 0.7em;
+            }
+
+            .hero .hero-logo-text .kipsa-part {
+                font-size: 1em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            nav a {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .special-content h3 {
+                font-size: 1.8em;
+            }
+
+            .special-ingredients {
+                font-size: 1em;
+            }
+
+            .special-price {
+                font-size: 2.5em;
+            }
+
+            .map-container iframe {
+                max-width: 100%;
+                /* Allow map to shrink fully */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#menu">Hinnasto</a></li>
+                <li><a href="#lunch-deals">Lounaslistat</a></li>
+                <li><a href="#specials">Ateriat</a></li>
+                <li><a href="#about">Meistä</a></li>
+                <li><a href="#contact">Yhteystiedot</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-logo">
+            <img src="https://i.imgur.com/uR1D5jT.png" alt="Grilli KIPSA Logo">
+        </div>
+
+        <div class="hero-logo-text">
+            <span class="grilli-part">Grilli</span>
+            <span class="kipsa-part">KIPSA</span>
+        </div>
+
+        <h1 style="display: none;">Grilli KIPSA</h1>
+        <p>Maukkaimmat herkut aamusta yöhön!</p>
+    </div>
+
+    <section id="menu">
+        <h2>Hinnasto</h2>
+        <div class="menu-column">
+            <div class="menu-category">
+                <h3>Hampurilaiset</h3>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Klassinen hampurilainen</span>
+                        <span class="item-price">8,50€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Juustohampurilainen</span>
+                        <span class="item-price">9,50€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Tuplahampurilainen</span>
+                        <span class="item-price">12,00€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">KIPSA Erikois</span>
+                        <span class="item-price">13,50€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Kanahampurilainen</span>
+                        <span class="item-price">10,50€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Grillilautanen</h3>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Porsaankyljyslautanen</span>
+                        <span class="item-price">15,00€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Makkaralautanen</span>
+                        <span class="item-price">12,00€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Sekagrillilautanen</span>
+                        <span class="item-price">18,00€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-column">
+            <div class="menu-category">
+                <h3>Kebabit & Rullat</h3>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Kebab riisillä</span>
+                        <span class="item-price">11,00€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Kebab ranskalaisilla</span>
+                        <span class="item-price">11,50€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Kebabrulla</span>
+                        <span class="item-price">12,50€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Kanakebab</span>
+                        <span class="item-price">12,00€</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Hot Dogit</h3>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Tavallinen Hot Dog</span>
+                        <span class="item-price">6,00€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Mega Hot Dog</span>
+                        <span class="item-price">8,00€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-category">
+                <h3>Juomat</h3>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Virvoitusjuomat</span>
+                        <span class="item-price">3,00€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Kahvi/Tee</span>
+                        <span class="item-price">2,50€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-column">
+            <div class="menu-category">
+                <h3>Pitaleivät</h3>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Pitaleipä Kebabilla</span>
+                        <span class="item-price">9,50€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Pitaleipä Kanalla</span>
+                        <span class="item-price">9,50€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Pitaleipä Halloumilla</span>
+                        <span class="item-price">10,00€</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-category">
+                <h3>Snacksit</h3>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Ranskalaiset perunat</span>
+                    </div>
+                    <div class="size-options">
+                        <span><span class="size-name">Pieni</span> <span class="size-price">3,50€</span></span>
+                        <span><span class="size-name">Normaali</span> <span class="size-price">4,50€</span></span>
+                        <span><span class="size-name">Iso</span> <span class="size-price">6,00€</span></span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Sipulirenkaat</span>
+                        <span class="item-price">5,00€</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-main">
+                        <span class="item-name">Mozzarellatikut</span>
+                        <span class="item-price">6,00€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="lunch-deals">
+        <h2 class="lunch-title">LOUNASTARJOUKSIA</h2>
+        <div class="lunch-items">
+            <div class="lunch-item">
+                <div class="item-name-box">
+                    <span class="item-name">Lihapullamakkaraperunat</span>
+                    <span class="item-detail">(Norm.koko)</span>
+                </div>
+                <span class="item-price">6,20€</span>
+            </div>
+            <div class="lunch-item">
+                <div class="item-name-box">
+                    <span class="item-name">Makkaraperunat</span>
+                </div>
+                <span class="item-price">5,00€</span>
+            </div>
+            <div class="lunch-item">
+                <div class="item-name-box">
+                    <span class="item-name">Kerroshampurilainen</span>
+                </div>
+                <span class="item-price">4,70€</span>
+            </div>
+            <div class="lunch-item">
+                <div class="item-name-box">
+                    <span class="item-name">Piirakka pihvillä</span>
+                    <span class="item-detail">+ muna + 2 nakkia</span>
+                </div>
+                <span class="item-price">6,20€</span>
+            </div>
+            <div class="lunch-item">
+                <div class="item-name-box">
+                    <span class="item-name">Kanasalaatti</span>
+                </div>
+                <span class="item-price">6,00€</span>
+            </div>
+        </div>
+        <p class="lunch-special-note">- Lounastajille jälkkärikahvit!</p>
+    </section>
+
+
+    <section id="specials">
+        <h2>Ateriat</h2>
+        <div class="specials-container">
+            <div class="special-item-card">
+                <div class="special-image">
+                    <img src="./img/testateria.jpg" alt="Savujuusto-chili Burger">
+                </div>
+                <div class="special-content">
+                    <h3>Savujuusto-chili<br>Burger</h3>
+                    <ul class="special-ingredients">
+                        <li>Kerrossämpylä</li>
+                        <li>2x45g Kokolihapihvi</li>
+                        <li>2 siivua savujuustoa</li>
+                        <li>Salaatti+ chilimajoneesi</li>
+                        <li>Paahdettu sipulirouhe</li>
+                    </ul>
+                    <div class="special-price">
+                        5,00€
+                    </div>
+                </div>
+            </div>
+
+            <div class="special-item-card">
+                <div class="special-image">
+                    <img src="./img/testateria.jpg" alt="Tuplajuusto Pekoni">
+                </div>
+                <div class="special-content">
+                    <h3>Tuplajuusto<br>Pekoni</h3>
+                    <ul class="special-ingredients">
+                        <li>Kerrossämpylä</li>
+                        <li>2x45g Pihvi</li>
+                        <li>2 siivua juustoa</li>
+                        <li>Pekonia</li>
+                        <li>Paahdettu sipulirouhe</li>
+                    </ul>
+                    <div class="special-price">
+                        6,50€
+                    </div>
+                </div>
+            </div>
+
+            <div class="special-item-card">
+                <div class="special-image">
+                    <img src="./img/testateria.jpg" alt="Halloumi Ranskalaiset">
+                </div>
+                <div class="special-content">
+                    <h3>Halloumi<br>Ranskalaiset</h3>
+                    <ul class="special-ingredients">
+                        <li>Ranskalaiset</li>
+                        <li>Halloumitikkuja</li>
+                        <li>Salaattia</li>
+                        <li>Chilimajoneesi</li>
+                        <li>Makea chilikastike</li>
+                    </ul>
+                    <div class="special-price">
+                        7,00€
+                    </div>
+                </div>
+            </div>
+
+            <div class="special-item-card">
+                <div class="special-image">
+                    <img src="./img/testateria.jpg" alt="Kananugetti Ateria">
+                </div>
+                <div class="special-content">
+                    <h3>Kananugetti<br>Ateria</h3>
+                    <ul class="special-ingredients">
+                        <li>6 kpl Kananugettia</li>
+                        <li>Ranskalaiset</li>
+                        <li>Salaattia</li>
+                        <li>Currymajoneesi</li>
+                        <li>0.33l Juoma</li>
+                    </ul>
+                    <div class="special-price">
+                        8,50€
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>Meistä</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Tervetuloa <strong>Grilli KIPSAan</strong>, missä intohimo grillaamiseen kohtaa tuoreimmat
+                    raaka-aineet! Sitoutuneena kulinaariseen erinomaisuuteen, olemme tarjoilleet herkullisia
+                    grilliruokia yhteisöllemme jo vuosia. Salaisuutemme? Omistautuminen laadulle, ainutlaatuiset
+                    marinadit ja kodikas ilmapiiri, joka tekee jokaisesta ateriasta erityisen tilaisuuden.</p>
+                <p>Mehevistä hampurilaisista meheviin vartaisiin, ruokalistamme on suunniteltu ilahduttamaan jokaista
+                    makuaistia. Uskomme hyvään ruokaan, hyvään seuraan ja unohtumattomien ruokailukokemusten luomiseen.
+                </p>
+            </div>
+            <div class="about-image">
+                <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Yhteystiedot</h2>
+        <div class="contact-info">
+            <p><strong>Osoite:</strong> 123 Grillikatu, BBQ-kaupunki, 12345</p>
+            <p><strong>Puhelin:</strong> <a href="tel:+123456789">+123 456 789</a></p>
+            <p><strong>Sähköposti:</strong> <a href="mailto:info@grillikipsa.com">info@grillikipsa.com</a></p>
+
+            <div class="opening-hours">
+                <strong>Aukioloajat:</strong>
+                <p data-day="1">Ma: 11:00 - 22:00</p>
+                <p data-day="2">Ti: 11:00 - 22:00</p>
+                <p data-day="3">Ke: 11:00 - 22:00</p>
+                <p data-day="4">To: 11:00 - 22:00</p>
+                <p data-day="5">Pe: 11:00 - 23:00</p>
+                <p data-day="6">La: 12:00 - 23:00</p>
+                <p data-day="0">Su: 12:00 - 21:00</p>
+            </div>
+            <div class="contact-social-icon">
+                <a href="https://www.facebook.com/your-grillikipsa-page" target="_blank" rel="noopener noreferrer"
+                    aria-label="Löydä meidät Facebookista">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path
+                            d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.29 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.75l-11 71.69h-57.75V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d817.684742671894!2d26.70812835513835!3d60.8680265948975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4691b257d7b868a5%3A0x52200509f968f982!2sGrilli-Kipsa!5e0!3m2!1sfi!2sfi!4v1761010979095!5m2!1sfi!2sfi"
+                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2023 Grilli KIPSA. Kaikki oikeudet pidätetään.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+            // Offset for the sticky header + a little buffer
+            const headerOffset = header ? header.offsetHeight + 30 : 90;
+            const duration = 700; // Duration of the scroll animation in milliseconds
+
+            // Easing function (quadratic easing in/out)
+            function easeInOutQuad(t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            }
+
+            // The main smooth scroll function
+            function smoothScrollTo(targetPosition, scrollDuration) {
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                let startTime = null;
+
+                function animationStep(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    // Ensure scrollDuration is not zero to prevent division by zero
+                    if (scrollDuration <= 0) scrollDuration = 1;
+                    const run = easeInOutQuad(timeElapsed, startPosition, distance, scrollDuration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < scrollDuration) requestAnimationFrame(animationStep);
+                }
+
+                requestAnimationFrame(animationStep);
+            }
+
+            // Add click listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent the default jump
+
+                    const targetId = this.getAttribute('href');
+                    try {
+                        const targetElement = document.querySelector(targetId);
+
+                        if (targetElement) {
+                            // Calculate where to scroll to
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            // Add window.pageYOffset to get position relative to document top
+                            const offsetPosition = window.pageYOffset + elementPosition - headerOffset;
+
+                            // Start the animation
+                            smoothScrollTo(offsetPosition, duration);
+                        } else {
+                            console.warn("Smooth scroll target element not found:", targetId);
+                        }
+                    } catch (error) {
+                        console.error("Error finding smooth scroll target:", targetId, error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
