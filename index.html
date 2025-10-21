@@ -71,6 +71,12 @@
             color: var(--primary-red);
         }
 
+        /* Active Nav Link Styling */
+        nav a.active-nav-link {
+            color: var(--primary-red);
+            /* Highlight active link with red */
+        }
+
         .hero {
             background-image:
                 linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -1307,6 +1313,49 @@
                     }
                 });
             });
+            // --- Active Nav Link Highlighting Logic ---
+            const sections = document.querySelectorAll('section[id]');
+            // Offset for determining active section (slightly more than header height)
+            const highlightHeaderOffset = header ? header.offsetHeight + 50 : 100;
+
+            function highlightNavLink() {
+                let currentSectionId = '';
+                const scrollPosition = window.pageYOffset;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - highlightHeaderOffset;
+                    const sectionHeight = section.offsetHeight;
+                    // Check if scroll position is within this section's bounds
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        currentSectionId = '#' + section.getAttribute('id');
+                    }
+                });
+
+                // Special case for reaching the bottom of the page
+                // If scrolled near the bottom, highlight the last link
+                if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 5) { // 5px tolerance
+                    const lastSection = sections[sections.length - 1];
+                    if (lastSection) {
+                        currentSectionId = '#' + lastSection.getAttribute('id');
+                    }
+                }
+
+                // Update active class on nav links
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav-link');
+                    // Check if the link's href matches the currentSectionId
+                    if (link.getAttribute('href') === currentSectionId) {
+                        link.classList.add('active-nav-link');
+                    }
+                });
+            }
+
+
+            // Add scroll event listener
+            window.addEventListener('scroll', highlightNavLink);
+
+            // Initial call to highlight the correct link on page load
+            highlightNavLink();
         });
     </script>
 </body>
