@@ -11,41 +11,78 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
-
         :root {
             --primary-red: #cc0000;
             --primary-red-readable: #a00000;
             --secondary-black: #222222;
             --light-grey: #f8f8f8;
-            /* Main body background */
+            --off-white: #fdfdfd;
             --dark-grey: #555555;
             --white: #ffffff;
-            /* Section background */
             --text-color: #333333;
-            --menu-bg: #fdfdfd;
+            --menu-bg: #ffffff;
             --menu-border: #e0e0e0;
+            --header-top-offset: 1rem;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 0;
+            padding-top: 100px;
+            /* Space for fixed header */
             box-sizing: border-box;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-grey);
+            overflow-y: auto;
         }
 
+        /* Header Styling */
         header {
-            background-color: var(--secondary-black);
+            background-color: rgba(34, 34, 34, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: var(--white);
-            padding: 1rem 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            top: var(--header-top-offset);
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 4rem);
+            max-width: 1100px;
+            border-radius: 50px;
             z-index: 1000;
+            box-sizing: border-box;
+            transition: top 0.4s ease,
+                background-color 0.4s ease,
+                backdrop-filter 0.4s ease,
+                box-shadow 0.4s ease;
         }
+
+        header.at-top {
+            background-color: rgba(34, 34, 34, 0.92);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            top: 0;
+            left: 0;
+            transform: translateX(0);
+            width: 100%;
+            max-width: 100%;
+            border-radius: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header.header-hidden {
+            top: -120px;
+            box-shadow: none;
+        }
+
+        /* END Header Styling */
 
         nav ul {
             list-style: none;
@@ -54,9 +91,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            /* Allow nav to wrap on small screens */
             gap: 1.5rem 2rem;
-            /* Add row gap */
         }
 
         nav a {
@@ -65,129 +100,115 @@
             font-weight: 600;
             font-size: 1.1em;
             transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
         }
 
-        nav a:hover {
-            color: var(--primary-red);
-        }
-
-        /* Active Nav Link Styling */
+        nav a:hover,
         nav a.active-nav-link {
             color: var(--primary-red);
-            /* Highlight active link with red */
+        }
+
+        nav a.active-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-red);
         }
 
         .hero {
             background-image:
                 linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-                /* Darker overlay */
                 url('./img/Kipsa.jpg');
-            /* Base scene image */
             background-size: auto, cover;
-            background-position: center, center;
+            background-position: center;
             background-repeat: no-repeat;
             color: var(--white);
             text-align: center;
             padding: 4rem 2rem;
-            min-height: 40vh;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             border-bottom: 4px solid var(--primary-red-readable);
-        }
-
-        .hero-logo {
-            display: none;
+            margin-top: -100px;
         }
 
         .hero .hero-logo-text {
             font-family: 'Oswald', sans-serif;
-            /* Keep Oswald for main text */
             font-size: 4.5em;
-            /* Same large size */
             margin-bottom: 0.5rem;
             color: var(--white);
-            /* Default color for the whole div, overridden by spans */
             letter-spacing: 2px;
             text-transform: uppercase;
             border-bottom: none;
             padding-bottom: 0;
             display: flex;
-            /* Use flexbox to align "Grilli" and "KIPSA" */
             flex-direction: column;
-            /* Stack them vertically */
             align-items: center;
-            /* Center horizontally */
             line-height: 0.9;
-            /* Reduce line height between the two parts */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            /* Keep text shadow */
         }
 
         .hero .hero-logo-text .grilli-part {
             color: var(--primary-red);
-            /* Red color for "Grilli" */
             font-size: 0.6em;
-            /* Smaller size for "Grilli" */
             font-weight: 700;
             letter-spacing: 0.5px;
             margin-bottom: -0.5rem;
-            /* Pull "Grilli" closer to "KIPSA" */
         }
 
         .hero .hero-logo-text .kipsa-part {
             color: var(--white);
-            /* White color for "KIPSA" */
             font-size: 1.1em;
-            /* Larger size for "KIPSA" */
             font-weight: 700;
             letter-spacing: 3px;
             position: relative;
             top: 0;
-            /* Adjust vertical position if needed */
         }
 
         .hero h1 {
-            /* This rule is now mostly superseded by .hero-logo-text for the main title */
             display: none;
-            /* Hide the old H1 */
         }
 
         .hero p {
             font-size: 1.6em;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 1rem auto 0;
             font-weight: 400;
-            margin-top: 1rem;
         }
 
         section {
-            padding: 1.5rem 2rem 2.5rem;
-            /* Reduced top padding */
+            padding: 3rem 2rem;
             max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 3rem auto;
             background-color: var(--white);
-            margin-bottom: 2rem;
-            /* Reduced margin between sections */
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: block;
+            overflow: visible;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--off-white);
         }
 
         #menu {
             margin-top: 3rem;
-            /* Added space between hero and menu */
         }
 
         h2 {
             font-family: 'Lora', serif;
             color: var(--secondary-black);
-            /* Changed default h2 color to black */
             font-size: 3em;
             text-align: center;
             margin-bottom: 2.5rem;
+            margin-top: 0;
             position: relative;
             letter-spacing: 1px;
         }
@@ -201,64 +222,54 @@
             width: 80px;
             height: 3px;
             background-color: var(--secondary-black);
-            /* Changed default h2 underline to black */
         }
 
         /* Menu Section Styling */
         #menu {
             background-color: var(--menu-bg);
-            /* Padding is now controlled by the main 'section' rule */
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
             border: 1px solid var(--menu-border);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            align-items: flex-start;
         }
 
         #menu h2 {
-            /* Targeting Hinnasto specifically */
-            width: 100%;
-            margin-bottom: 2.5rem;
             color: var(--secondary-black);
-            /* Ensure it's black */
         }
 
         #menu h2::after {
             background-color: var(--secondary-black);
-            /* Ensure underline is black */
+        }
+
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .menu-column {
             flex: 1;
             min-width: 280px;
-            padding: 1rem 1.5rem;
-            /* Reduced internal padding slightly */
-            border-right: 1px solid var(--menu-border);
-            /* Lighter solid border */
-        }
-
-        .menu-column:last-of-type {
+            max-width: 350px;
+            padding: 0 1.5rem;
+            box-sizing: border-box;
             border-right: none;
         }
 
         .menu-category {
-            margin-bottom: 2.5rem;
-            /* Increased space between categories */
+            margin-bottom: 2rem;
         }
 
         .menu-category h3 {
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
             color: var(--primary-red-readable);
-            /* Keep category headers red */
-            font-size: 1.8em;
-            margin-bottom: 1.5rem;
-            /* Increased space below header */
+            font-size: 1.6em;
+            margin-bottom: 1rem;
             text-transform: uppercase;
             border-bottom: 2px solid var(--primary-red-readable);
-            /* Keep category underlines red */
             padding-bottom: 0.5rem;
             letter-spacing: 0.5px;
         }
@@ -267,45 +278,28 @@
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            margin-bottom: 1.2rem;
-            /* Increased space between items */
-            padding-bottom: 0.8rem;
-            /* Increased space below item before line */
-            font-size: 1em;
-            /* Slightly larger base font */
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            font-size: 0.95em;
             position: relative;
             border-bottom: 1px solid var(--menu-border);
-            /* Lighter solid line */
         }
 
         .menu-item:last-child {
             border-bottom: none;
         }
 
-        .menu-item::after {
-            /* Remove the pseudo element border */
-            display: none;
-        }
-
         .item-main {
-            /* Wrapper for item name and potentially its price if no sizes */
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             width: 100%;
-            margin-bottom: 0.4rem;
-            /* Adjusted space */
+            margin-bottom: 0.3rem;
         }
 
         .item-name {
             color: var(--text-color);
-            padding-left: 0;
             font-weight: 600;
-            /* Bolder item name */
-        }
-
-        .item-description {
-            display: none;
         }
 
         .item-price {
@@ -316,17 +310,14 @@
         }
 
         .size-options {
-            margin-left: 1.5rem;
-            /* Indent size options */
+            margin-left: 1rem;
             font-size: 0.9em;
-            /* Slightly smaller text */
         }
 
         .size-options span {
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.2rem;
-            /* Slightly more space */
         }
 
         .size-options .size-name {
@@ -337,20 +328,19 @@
         .size-options .size-price {
             font-weight: 600;
             color: var(--primary-red-readable);
-            /* Red price for sizes */
         }
 
         /* Lunch Deals Section Styling */
         #lunch-deals {
             max-width: 600px;
-            margin: 2rem auto;
+            margin: 3rem auto;
             padding: 0;
             border: 4px solid var(--primary-red);
-            border-radius: 0;
-            box-shadow: none;
             background-color: var(--white);
             overflow: hidden;
             text-align: left;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .lunch-title {
@@ -361,18 +351,14 @@
             text-align: center;
             text-transform: uppercase;
             padding: 1.5rem;
-            /* Restored full padding */
             background-color: #f0f0f0;
             border-bottom: 1px solid var(--menu-border);
-            margin-top: 0;
-            margin-bottom: 0;
+            margin: 0;
             position: relative;
-            /* Keep for ::after */
         }
 
         .lunch-title::after {
             display: none;
-            /* Hide the default h2 red underline */
         }
 
         .lunch-items {
@@ -383,7 +369,6 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            /* Aligns price and name-box to the bottom */
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px dotted var(--dark-grey);
@@ -391,14 +376,12 @@
             line-height: 1.2;
         }
 
-        /* wrapper for item name and detail */
         .item-name-box {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             line-height: 1.3;
-            /* Tighter line height for the two lines */
         }
 
         .lunch-item .item-name {
@@ -411,7 +394,6 @@
             font-weight: 400;
             color: var(--dark-grey);
             margin-left: 0;
-            /* reset margin */
             white-space: nowrap;
         }
 
@@ -429,123 +411,93 @@
             font-weight: 600;
             margin-top: 1.5rem;
             padding: 0 2rem 1rem;
-            /* Added bottom padding */
             text-align: center;
         }
 
         /* Special Deal Section */
         #specials {
-            max-width: 1200px;
-            /* Full width like other sections */
-            margin: 2rem auto;
-            /* Spacing */
-            padding: 1.5rem 2rem 2.5rem;
-            /* Reduced top padding */
-            border: none;
-            /* No border on the section container */
-            box-shadow: none;
-            background-color: var(--light-grey);
-            /* Match body background for contrast */
+            background-color: var(--off-white);
             text-align: center;
         }
 
         #specials h2 {
-            /* Targeting Ateriat specifically */
             color: var(--secondary-black);
+            padding-bottom: 1rem;
         }
 
         #specials h2::after {
             background-color: var(--secondary-black);
         }
 
-
         .specials-container {
             display: flex;
             flex-wrap: wrap;
-            /* Allows wrapping on small screens */
             justify-content: center;
-            /* Center the cards */
             gap: 2rem;
-            /* Space between cards */
+            width: 100%;
+            padding-bottom: 0;
         }
 
         .special-item-card {
             flex: 1;
-            /* Allow cards to grow */
-            min-width: 260px;
-            /* Min width before wrapping */
-            max-width: 300px;
-            /* Max width for each card */
+            min-width: 240px;
+            max-width: 280px;
             border: 2px solid var(--primary-red);
-            border-radius: 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background-color: var(--white);
             overflow: hidden;
-            /* Important for image */
             text-align: center;
             display: flex;
-            /* Use flex to make cards same height */
             flex-direction: column;
-            /* Stack content vertically */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
         }
 
         .special-image {
             width: 100%;
-            height: 180px;
-            /* Fixed height for consistency */
+            height: 160px;
             overflow: hidden;
-            /* Hide parts of image that don't fit */
             background-color: var(--light-grey);
-            /* Placeholder background */
         }
 
         .special-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Scale image to cover the area */
             display: block;
-            /* Remove extra space below image */
         }
 
-
         .special-content {
-            padding: 1.5rem 2rem 2rem 2rem;
-            /* Padding for the content */
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            /* Make content area grow to fill space */
         }
 
         .special-content h3 {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.8em;
-            /* Slightly smaller for card */
+            font-size: 1.6em;
             font-weight: 700;
             color: var(--secondary-black);
             line-height: 1.2;
-            margin: 0 0 1.5rem 0;
+            margin: 0 0 1rem 0;
         }
 
         .special-ingredients {
             list-style: none;
             padding: 0;
-            margin: 0 0 1.5rem 0;
+            margin: 0 0 1rem 0;
             text-align: left;
-            font-size: 1em;
-            /* Smaller font for ingredients */
+            font-size: 0.95em;
             font-weight: 600;
             color: var(--text-color);
             display: inline-block;
             flex-grow: 1;
-            /* Pushes price to the bottom */
         }
 
         .special-ingredients li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 1.2rem;
         }
 
         .special-ingredients li::before {
@@ -559,15 +511,12 @@
 
         .special-price {
             font-family: 'Oswald', sans-serif;
-            font-size: 2.5em;
-            /* Big price */
+            font-size: 2.2em;
             font-weight: 700;
             color: var(--secondary-black);
             line-height: 1;
             margin-top: auto;
-            /* Pushes price to bottom */
         }
-
 
         /* About Section */
         #about {
@@ -575,7 +524,6 @@
         }
 
         #about h2 {
-            /* Targeting Meistä specifically */
             color: var(--secondary-black);
         }
 
@@ -588,11 +536,16 @@
             align-items: center;
             gap: 2rem;
             flex-wrap: wrap;
+            width: 100%;
+            max-width: 1000px;
+            justify-content: center;
+            margin: 0 auto;
         }
 
         .about-text {
             flex: 1;
             min-width: 300px;
+            max-width: 500px;
         }
 
         .about-text p {
@@ -603,6 +556,7 @@
         .about-image {
             flex: 1;
             min-width: 300px;
+            max-width: 400px;
             text-align: center;
         }
 
@@ -612,164 +566,205 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Contact Section (Small Box) */
-        #contact {
-            max-width: 400px;
-            padding: 1.5rem 2.5rem 2.5rem;
-            /* Reduced top padding */
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        /* --- Scroll Reveal Styling --- */
+        /* Animate content wrappers/boxes */
+        .menu-container,
+        .lunch-box-content,
+        .specials-container,
+        .about-content,
+        .footer-content-wrapper {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Animate image containers */
+        .special-image,
+        .about-image {
+            opacity: 0;
+            /* Start invisible */
+            transform: scale(0.95);
+            /* Start slightly small */
+            transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
+            /* Delay image effect */
+        }
+
+        /* The 'visible' class added by JS */
+        .menu-container.visible,
+        .lunch-box-content.visible,
+        .specials-container.visible,
+        .about-content.visible,
+        .footer-content-wrapper.visible {
+            /* Added footer wrapper */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .special-image.visible,
+        .about-image.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- END Scroll Reveal Styling --- */
+
+        /* --- Footer Styling --- */
+        footer {
+            /* This is now the contact section */
+            background-color: var(--secondary-black);
+            color: var(--light-grey);
+            padding: 3rem 2rem 2rem 2rem;
+            position: relative;
+            z-index: 500;
+            margin-top: 3rem;
+        }
+
+        footer h2 {
+            color: var(--white);
+            font-size: 2em;
+            margin-bottom: 2rem;
+        }
+
+        footer h2::after {
             background-color: var(--white);
         }
 
-        #contact h2 {
-            font-size: 2em;
-            margin-bottom: 1.5rem;
-            color: var(--secondary-black);
+        footer h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--dark-grey);
+            padding-bottom: 0.5rem;
         }
 
-        #contact h2::after {
-            background-color: var(--secondary-black);
+        .footer-content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem 3rem;
+            max-width: 1100px;
+            margin: 0 auto 2rem auto;
+            text-align: left;
         }
 
-        .contact-info p {
+        .footer-column {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .footer-column p {
             margin-bottom: 0.8rem;
             font-size: 1em;
             line-height: 1.4;
+            color: var(--light-grey);
         }
 
-        .opening-hours p {
+        .footer-column .opening-hours p {
             margin-bottom: 0.3rem;
-            /* Tighter spacing for hours */
             line-height: 1.3;
+            color: var(--light-grey);
         }
 
-        .opening-hours strong {
-            /* Style for the main label */
+        .footer-column .opening-hours strong {
             display: block;
-            /* Put label on its own line */
             margin-bottom: 0.5rem;
+            color: var(--white);
         }
 
-        .contact-info strong {
-            color: var(--primary-red-readable);
-        }
-
-        .contact-info a {
-            color: var(--primary-red-readable);
+        .footer-column a {
+            /* Style for *actual* links in footer */
+            color: var(--white);
             text-decoration: none;
             transition: text-decoration 0.3s ease;
         }
 
-        .contact-info a:hover {
+        .footer-column a:hover {
             text-decoration: underline;
         }
 
-        .contact-social-icon {
-            text-align: center;
-            margin-top: 1.5rem;
+        .footer-column .contact-social-icon {
+            text-align: left;
+            margin-top: 1rem;
         }
 
-        .contact-social-icon a {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-social-icon a:hover {
-            transform: scale(1.1);
-        }
-
-        .contact-social-icon svg {
+        .footer-column .contact-social-icon svg {
             width: 35px;
             height: 35px;
-            fill: #1877F2;
-            /* Facebook blue */
+            fill: var(--white);
+            /* White icon */
         }
 
-        .map-container {
-            margin-top: 2rem;
-            /* Space above map */
+        .footer-column .map-container {
+            margin-top: 1rem;
             border-radius: 8px;
-            /* Optional rounded corners */
             overflow: hidden;
-            /* Ensure iframe respects border-radius */
         }
 
-        .map-container iframe {
+        .footer-column .map-container iframe {
             display: block;
-            /* Remove extra space below iframe */
             width: 100%;
-            /* Make map responsive */
-            max-width: 400px;
-            /* Match iframe width attribute */
-            height: 300px;
-            /* Match iframe height attribute */
+            max-width: none;
+            height: 250px;
             border: 0;
-            /* Remove default iframe border */
-            margin-left: auto;
-            margin-right: auto;
+            margin-left: 0;
+            margin-right: 0;
         }
 
-
-        footer {
-            background-color: var(--secondary-black);
-            color: var(--white);
+        .copyright {
             text-align: center;
-            padding: 0.5rem 1rem;
-            /* Further reduced padding */
-            margin-top: 2rem;
             font-size: 0.9em;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--dark-grey);
         }
+
+        /* --- END Footer Styling --- */
 
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
-            #menu .menu-column {
-                flex: 1 1 45%;
-                border-right: none;
+            header {
+                width: calc(100% - 2rem);
             }
 
             #menu .menu-column:nth-child(2n-1) {
-                border-right: 1px solid var(--menu-border);
-                /* Lighter solid border */
+                border-right: none;
             }
 
-            #menu-column:last-of-type {
+            .menu-column {
                 border-right: none;
             }
         }
 
         @media (max-width: 767px) {
-            .hero h1 {
-                /* Keep this for smaller screens if we decide to re-enable it */
-                font-size: 3em;
+            body {
+                padding-top: 70px;
+            }
+
+            header {
+                top: 0.5rem;
+                width: calc(100% - 1rem);
+                padding: 0.5rem 1rem;
+            }
+
+            nav ul {
+                gap: 0.5rem 1rem;
             }
 
             .hero .hero-logo-text {
-                /* Adjust font sizes for mobile */
                 font-size: 3em;
-            }
-
-            .hero .hero-logo-text .grilli-part {
-                font-size: 0.65em;
-            }
-
-            .hero .hero-logo-text .kipsa-part {
-                font-size: 1.1em;
             }
 
             .hero p {
                 font-size: 1.2em;
             }
 
-            nav ul {
-                gap: 1rem;
-                /* Tighter gap for wrapped nav */
-            }
-
             section {
-                padding: 1.5rem 1.5rem 2rem;
-                /* Reduced padding on mobile */
+                padding: 2rem 1.5rem;
             }
 
             h2 {
@@ -779,17 +774,20 @@
             #menu {
                 flex-direction: column;
                 align-items: stretch;
-                /* Fixes left-alignment */
+            }
+
+            .menu-container {
+                flex-direction: column;
+                align-items: center;
             }
 
             .menu-column {
                 min-width: unset;
+                width: 100%;
+                max-width: 450px;
                 border-right: none;
                 border-bottom: 1px solid var(--menu-border);
-                /* Lighter solid border */
-                padding-left: 0.5rem;
-                /* Less padding in mobile columns */
-                padding-right: 0.5rem;
+                padding: 1rem;
             }
 
             .menu-column:last-child {
@@ -800,8 +798,18 @@
                 flex-direction: column;
             }
 
+            .about-text {
+                max-width: 90%;
+            }
+
+            .about-image {
+                max-width: 80%;
+                margin-top: 1rem;
+            }
+
             #contact {
                 max-width: 90%;
+                padding: 2rem 1.5rem;
             }
 
             .lunch-title {
@@ -825,24 +833,51 @@
                 font-size: 0.9em;
                 padding: 0 1.5rem 1.5rem 1.5rem;
             }
+
+            .specials-container {
+                gap: 1.5rem;
+            }
+
+            .special-item-card {
+                max-width: 90%;
+                min-width: 280px;
+            }
+
+            /* Footer responsive */
+            .footer-content-wrapper {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .footer-column {
+                min-width: 100%;
+            }
+
+            footer {
+                padding: 2rem 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.5em;
+            body {
+                padding-top: 60px;
+            }
+
+            header {
+                top: 0.5rem;
+                width: calc(100% - 1.5rem);
+            }
+
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero {
+                min-height: 50vh;
             }
 
             .hero .hero-logo-text {
-                /* Further adjust font sizes for very small mobile */
                 font-size: 2.5em;
-            }
-
-            .hero .hero-logo-text .grilli-part {
-                font-size: 0.7em;
-            }
-
-            .hero .hero-logo-text .kipsa-part {
-                font-size: 1em;
             }
 
             .hero p {
@@ -871,14 +906,17 @@
 
             .map-container iframe {
                 max-width: 100%;
-                /* Allow map to shrink fully */
+            }
+
+            .menu-column {
+                width: 100%;
             }
         }
     </style>
 </head>
 
 <body>
-    <header>
+    <header class="at-top">
         <nav>
             <ul>
                 <li><a href="#menu">Hinnasto</a></li>
@@ -891,238 +929,171 @@
     </header>
 
     <div class="hero">
-        <div class="hero-logo">
-            <img src="https://i.imgur.com/uR1D5jT.png" alt="Grilli KIPSA Logo">
-        </div>
-
         <div class="hero-logo-text">
             <span class="grilli-part">Grilli</span>
             <span class="kipsa-part">KIPSA</span>
         </div>
-
-        <h1 style="display: none;">Grilli KIPSA</h1>
         <p>Maukkaimmat herkut aamusta yöhön!</p>
     </div>
 
     <section id="menu">
         <h2>Hinnasto</h2>
-        <div class="menu-column">
-            <div class="menu-category">
-                <h3>Hampurilaiset</h3>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Klassinen hampurilainen</span>
-                        <span class="item-price">8,50€</span>
+        <div class="menu-container">
+            <div class="menu-column">
+                <div class="menu-category">
+                    <h3>Hampurilaiset</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Klassinen hampurilainen</span> <span
+                                class="item-price">8,50€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Juustohampurilainen</span> <span
+                                class="item-price">9,50€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Tuplahampurilainen</span> <span
+                                class="item-price">12,00€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">KIPSA Erikois</span> <span
+                                class="item-price">13,50€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Kanahampurilainen</span> <span
+                                class="item-price">10,50€</span> </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Juustohampurilainen</span>
-                        <span class="item-price">9,50€</span>
+                <div class="menu-category">
+                    <h3>Grillilautanen</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Porsaankyljyslautanen</span> <span
+                                class="item-price">15,00€</span> </div>
                     </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Tuplahampurilainen</span>
-                        <span class="item-price">12,00€</span>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Makkaralautanen</span> <span
+                                class="item-price">12,00€</span> </div>
                     </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">KIPSA Erikois</span>
-                        <span class="item-price">13,50€</span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Kanahampurilainen</span>
-                        <span class="item-price">10,50€</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-category">
-                <h3>Grillilautanen</h3>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Porsaankyljyslautanen</span>
-                        <span class="item-price">15,00€</span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Makkaralautanen</span>
-                        <span class="item-price">12,00€</span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Sekagrillilautanen</span>
-                        <span class="item-price">18,00€</span>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Sekagrillilautanen</span> <span
+                                class="item-price">18,00€</span> </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="menu-column">
-            <div class="menu-category">
-                <h3>Kebabit & Rullat</h3>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Kebab riisillä</span>
-                        <span class="item-price">11,00€</span>
+            <div class="menu-column">
+                <div class="menu-category">
+                    <h3>Kebabit & Rullat</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Kebab riisillä</span> <span
+                                class="item-price">11,00€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Kebab ranskalaisilla</span> <span
+                                class="item-price">11,50€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Kebabrulla</span> <span
+                                class="item-price">12,50€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Kanakebab</span> <span
+                                class="item-price">12,00€</span> </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Kebab ranskalaisilla</span>
-                        <span class="item-price">11,50€</span>
+                <div class="menu-category">
+                    <h3>Hot Dogit</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Tavallinen Hot Dog</span> <span
+                                class="item-price">6,00€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Mega Hot Dog</span> <span
+                                class="item-price">8,00€</span> </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Kebabrulla</span>
-                        <span class="item-price">12,50€</span>
+                <div class="menu-category">
+                    <h3>Juomat</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Virvoitusjuomat</span> <span
+                                class="item-price">3,00€</span> </div>
                     </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Kanakebab</span>
-                        <span class="item-price">12,00€</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-category">
-                <h3>Hot Dogit</h3>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Tavallinen Hot Dog</span>
-                        <span class="item-price">6,00€</span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Mega Hot Dog</span>
-                        <span class="item-price">8,00€</span>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Kahvi/Tee</span> <span
+                                class="item-price">2,50€</span> </div>
                     </div>
                 </div>
             </div>
-            <div class="menu-category">
-                <h3>Juomat</h3>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Virvoitusjuomat</span>
-                        <span class="item-price">3,00€</span>
+            <div class="menu-column">
+                <div class="menu-category">
+                    <h3>Pitaleivät</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Pitaleipä Kebabilla</span> <span
+                                class="item-price">9,50€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Pitaleipä Kanalla</span> <span
+                                class="item-price">9,50€</span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Pitaleipä Halloumilla</span> <span
+                                class="item-price">10,00€</span> </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Kahvi/Tee</span>
-                        <span class="item-price">2,50€</span>
+                <div class="menu-category">
+                    <h3>Snacksit</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Ranskalaiset perunat</span> </div>
+                        <div class="size-options"> <span><span class="size-name">Pieni</span> <span
+                                    class="size-price">3,50€</span></span> <span><span class="size-name">Normaali</span>
+                                <span class="size-price">4,50€</span></span> <span><span class="size-name">Iso</span>
+                                <span class="size-price">6,00€</span></span> </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="menu-column">
-            <div class="menu-category">
-                <h3>Pitaleivät</h3>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Pitaleipä Kebabilla</span>
-                        <span class="item-price">9,50€</span>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Sipulirenkaat</span> <span
+                                class="item-price">5,00€</span> </div>
                     </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Pitaleipä Kanalla</span>
-                        <span class="item-price">9,50€</span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Pitaleipä Halloumilla</span>
-                        <span class="item-price">10,00€</span>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-category">
-                <h3>Snacksit</h3>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Ranskalaiset perunat</span>
-                    </div>
-                    <div class="size-options">
-                        <span><span class="size-name">Pieni</span> <span class="size-price">3,50€</span></span>
-                        <span><span class="size-name">Normaali</span> <span class="size-price">4,50€</span></span>
-                        <span><span class="size-name">Iso</span> <span class="size-price">6,00€</span></span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Sipulirenkaat</span>
-                        <span class="item-price">5,00€</span>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-main">
-                        <span class="item-name">Mozzarellatikut</span>
-                        <span class="item-price">6,00€</span>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Mozzarellatikut</span> <span
+                                class="item-price">6,00€</span> </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <section id="lunch-deals">
-        <h2 class="lunch-title">LOUNASTARJOUKSIA</h2>
-        <div class="lunch-items">
-            <div class="lunch-item">
-                <div class="item-name-box">
-                    <span class="item-name">Lihapullamakkaraperunat</span>
-                    <span class="item-detail">(Norm.koko)</span>
+        <div class="lunch-box-content">
+            <h2 class="lunch-title">LOUNASTARJOUKSIA</h2>
+            <div class="lunch-items">
+                <div class="lunch-item">
+                    <div class="item-name-box"> <span class="item-name">Lihapullamakkaraperunat</span> <span
+                            class="item-detail">(Norm.koko)</span> </div> <span class="item-price">6,20€</span>
                 </div>
-                <span class="item-price">6,20€</span>
-            </div>
-            <div class="lunch-item">
-                <div class="item-name-box">
-                    <span class="item-name">Makkaraperunat</span>
+                <div class="lunch-item">
+                    <div class="item-name-box"> <span class="item-name">Makkaraperunat</span> </div> <span
+                        class="item-price">5,00€</span>
                 </div>
-                <span class="item-price">5,00€</span>
-            </div>
-            <div class="lunch-item">
-                <div class="item-name-box">
-                    <span class="item-name">Kerroshampurilainen</span>
+                <div class="lunch-item">
+                    <div class="item-name-box"> <span class="item-name">Kerroshampurilainen</span> </div> <span
+                        class="item-price">4,70€</span>
                 </div>
-                <span class="item-price">4,70€</span>
-            </div>
-            <div class="lunch-item">
-                <div class="item-name-box">
-                    <span class="item-name">Piirakka pihvillä</span>
-                    <span class="item-detail">+ muna + 2 nakkia</span>
+                <div class="lunch-item">
+                    <div class="item-name-box"> <span class="item-name">Piirakka pihvillä</span> <span
+                            class="item-detail">+ muna + 2 nakkia</span> </div> <span class="item-price">6,20€</span>
                 </div>
-                <span class="item-price">6,20€</span>
-            </div>
-            <div class="lunch-item">
-                <div class="item-name-box">
-                    <span class="item-name">Kanasalaatti</span>
+                <div class="lunch-item">
+                    <div class="item-name-box"> <span class="item-name">Kanasalaatti</span> </div> <span
+                        class="item-price">6,00€</span>
                 </div>
-                <span class="item-price">6,00€</span>
             </div>
+            <p class="lunch-special-note">- Lounastajille jälkkärikahvit!</p>
         </div>
-        <p class="lunch-special-note">- Lounastajille jälkkärikahvit!</p>
     </section>
-
 
     <section id="specials">
         <h2>Ateriat</h2>
         <div class="specials-container">
             <div class="special-item-card">
-                <div class="special-image">
-                    <img src="./img/testateria.jpg" alt="Savujuusto-chili Burger">
-                </div>
+                <div class="special-image"> <img src="./img/testateria.jpg" alt="Savujuusto-chili Burger"> </div>
                 <div class="special-content">
                     <h3>Savujuusto-chili<br>Burger</h3>
                     <ul class="special-ingredients">
@@ -1132,16 +1103,11 @@
                         <li>Salaatti+ chilimajoneesi</li>
                         <li>Paahdettu sipulirouhe</li>
                     </ul>
-                    <div class="special-price">
-                        5,00€
-                    </div>
+                    <div class="special-price"> 5,00€ </div>
                 </div>
             </div>
-
             <div class="special-item-card">
-                <div class="special-image">
-                    <img src="./img/testateria.jpg" alt="Tuplajuusto Pekoni">
-                </div>
+                <div class="special-image"> <img src="./img/testateria.jpg" alt="Tuplajuusto Pekoni"> </div>
                 <div class="special-content">
                     <h3>Tuplajuusto<br>Pekoni</h3>
                     <ul class="special-ingredients">
@@ -1151,16 +1117,11 @@
                         <li>Pekonia</li>
                         <li>Paahdettu sipulirouhe</li>
                     </ul>
-                    <div class="special-price">
-                        6,50€
-                    </div>
+                    <div class="special-price"> 6,50€ </div>
                 </div>
             </div>
-
             <div class="special-item-card">
-                <div class="special-image">
-                    <img src="./img/testateria.jpg" alt="Halloumi Ranskalaiset">
-                </div>
+                <div class="special-image"> <img src="./img/testateria.jpg" alt="Halloumi Ranskalaiset"> </div>
                 <div class="special-content">
                     <h3>Halloumi<br>Ranskalaiset</h3>
                     <ul class="special-ingredients">
@@ -1170,16 +1131,11 @@
                         <li>Chilimajoneesi</li>
                         <li>Makea chilikastike</li>
                     </ul>
-                    <div class="special-price">
-                        7,00€
-                    </div>
+                    <div class="special-price"> 7,00€ </div>
                 </div>
             </div>
-
             <div class="special-item-card">
-                <div class="special-image">
-                    <img src="./img/testateria.jpg" alt="Kananugetti Ateria">
-                </div>
+                <div class="special-image"> <img src="./img/testateria.jpg" alt="Kananugetti Ateria"> </div>
                 <div class="special-content">
                     <h3>Kananugetti<br>Ateria</h3>
                     <ul class="special-ingredients">
@@ -1189,9 +1145,7 @@
                         <li>Currymajoneesi</li>
                         <li>0.33l Juoma</li>
                     </ul>
-                    <div class="special-price">
-                        8,50€
-                    </div>
+                    <div class="special-price"> 8,50€ </div>
                 </div>
             </div>
         </div>
@@ -1209,156 +1163,213 @@
                     makuaistia. Uskomme hyvään ruokaan, hyvään seuraan ja unohtumattomien ruokailukokemusten luomiseen.
                 </p>
             </div>
-            <div class="about-image">
-                <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat">
-            </div>
+            <div class="about-image"> <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat"> </div>
         </div>
     </section>
 
-    <section id="contact">
+    <footer id="contact">
         <h2>Yhteystiedot</h2>
-        <div class="contact-info">
-            <p><strong>Osoite:</strong> 123 Grillikatu, BBQ-kaupunki, 12345</p>
-            <p><strong>Puhelin:</strong> <a href="tel:+123456789">+123 456 789</a></p>
-            <p><strong>Sähköposti:</strong> <a href="mailto:info@grillikipsa.com">info@grillikipsa.com</a></p>
+        <div class="footer-content-wrapper">
+            <div class="footer-column footer-left">
+                <h3>Aukioloajat</h3>
+                <div class="opening-hours">
+                    <p data-day="1">Ma: 11:00 - 22:00</p>
+                    <p data-day="2">Ti: 11:00 - 22:00</p>
+                    <p data-day="3">Ke: 11:00 - 22:00</p>
+                    <p data-day="4">To: 11:00 - 22:00</p>
+                    <p data-day="5">Pe: 11:00 - 23:00</p>
+                    <p data-day="6">La: 12:00 - 23:00</p>
+                    <p data-day="0">Su: 12:00 - 21:00</p>
+                </div>
 
-            <div class="opening-hours">
-                <strong>Aukioloajat:</strong>
-                <p data-day="1">Ma: 11:00 - 22:00</p>
-                <p data-day="2">Ti: 11:00 - 22:00</p>
-                <p data-day="3">Ke: 11:00 - 22:00</p>
-                <p data-day="4">To: 11:00 - 22:00</p>
-                <p data-day="5">Pe: 11:00 - 23:00</p>
-                <p data-day="6">La: 12:00 - 23:00</p>
-                <p data-day="0">Su: 12:00 - 21:00</p>
+                <h3 style="margin-top: 2rem;">Yhteystiedot</h3>
+                <p>+123 456 789</p>
+                <p>info@grillikipsa.com</p>
+                <div class="contact-social-icon">
+                    <a href="https://www.facebook.com/your-grillikipsa-page" target="_blank" rel="noopener noreferrer"
+                        aria-label="Löydä meidät Facebookista">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                                d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.29 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.75l-11 71.69h-57.75V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
+                        </svg>
+                    </a>
+                </div>
             </div>
-            <div class="contact-social-icon">
-                <a href="https://www.facebook.com/your-grillikipsa-page" target="_blank" rel="noopener noreferrer"
-                    aria-label="Löydä meidät Facebookista">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path
-                            d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.29 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.75l-11 71.69h-57.75V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z" />
-                    </svg>
-                </a>
-            </div>
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d817.684742671894!2d26.70812835513835!3d60.8680265948975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4691b257d7b868a5%3A0x52200509f968f982!2sGrilli-Kipsa!5e0!3m2!1sfi!2sfi!4v1761010979095!5m2!1sfi!2sfi"
-                    width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="footer-column footer-right">
+                <h3>Sijainti</h3>
+                <p>123 Grillikatu, BBQ-kaupunki, 12345</p>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d817.684742671894!2d26.70812835513835!3d60.8680265948975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4691b257d7b868a5%3A0x52200509f968f982!2sGrilli-Kipsa!5e0!3m2!1sfi!2sfi!4v1761010979095!5m2!1sfi!2sfi"
+                        width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Grilli Kipsa.</p>
+        <p class="copyright">© 2025 Grilli Kipsa.</p>
     </footer>
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const header = document.querySelector('header');
             const navLinks = document.querySelectorAll('header nav a[href^="#"]');
-            // Offset for the sticky header + a little buffer
-            const headerOffset = header ? header.offsetHeight + 30 : 90;
-            const duration = 700; // Duration of the scroll animation in milliseconds
+            const sections = document.querySelectorAll('section[id], footer[id="contact"]');
+            const menuSection = document.querySelector('#menu');
+            const duration = 700; // Milliseconds
+            let lastScrollTop = 0;
+            let isNavScrolling = false; // Flag to check if we are auto-scrolling
 
-            // Easing function (quadratic easing in/out)
-            function easeInOutQuad(t, b, c, d) {
-                t /= d / 2;
-                if (t < 1) return c / 2 * t * t + b;
-                t--;
-                return -c / 2 * (t * (t - 2) - 1) + b;
+            // --- Header Transition & Hide/Show on Scroll ---
+            function handleHeaderScroll() {
+                if (isNavScrolling) {
+                    return; // Don't run hide/show logic if we are auto-scrolling
+                }
+
+                let currentScrollTop = window.pageYOffset;
+                let hideThreshold = menuSection ? menuSection.offsetTop - (header.offsetHeight * 2) : 300;
+
+                // 1. Full-width vs. Floating state
+                if (currentScrollTop <= 20) {
+                    header.classList.add('at-top');
+                } else {
+                    header.classList.remove('at-top');
+                }
+
+                // 2. Hide/Show Logic
+                if (currentScrollTop > lastScrollTop && currentScrollTop > hideThreshold) {
+                    header.classList.add('header-hidden');
+                } else {
+                    header.classList.remove('header-hidden');
+                }
+                lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+            }
+            window.addEventListener('scroll', handleHeaderScroll);
+            handleHeaderScroll(); // Initial check
+
+            // --- Smooth Scrolling ---
+            function getHeaderOffset() {
+                const headerHeight = header.offsetHeight || 70;
+                if (header.classList.contains('at-top')) {
+                    return headerHeight + 10;
+                } else {
+                    const headerTop = parseFloat(getComputedStyle(header).top) || 16;
+                    return headerHeight + headerTop + 20;
+                }
             }
 
-            // The main smooth scroll function
+            function easeInOutQuad(t, b, c, d) { t /= d / 2; if (t < 1) return c / 2 * t * t + b; t--; return -c / 2 * (t * (t - 2) - 1) + b; }
             function smoothScrollTo(targetPosition, scrollDuration) {
+                isNavScrolling = true; // Set flag
                 const startPosition = window.pageYOffset;
                 const distance = targetPosition - startPosition;
                 let startTime = null;
-
                 function animationStep(currentTime) {
                     if (startTime === null) startTime = currentTime;
                     const timeElapsed = currentTime - startTime;
-                    // Ensure scrollDuration is not zero to prevent division by zero
                     if (scrollDuration <= 0) scrollDuration = 1;
                     const run = easeInOutQuad(timeElapsed, startPosition, distance, scrollDuration);
                     window.scrollTo(0, run);
-                    if (timeElapsed < scrollDuration) requestAnimationFrame(animationStep);
+                    if (timeElapsed < scrollDuration) {
+                        requestAnimationFrame(animationStep);
+                    } else {
+                        // Scroll finished
+                        setTimeout(() => { // Add a delay
+                            isNavScrolling = false; // Unset flag
+                            lastScrollTop = window.pageYOffset; // Update to *actual* final position
+                            handleHeaderScroll(); // Run handler once
+                        }, 100); // 100ms buffer
+                    }
                 }
-
                 requestAnimationFrame(animationStep);
             }
 
-            // Add click listeners to nav links
             navLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
-                    e.preventDefault(); // Prevent the default jump
+                    e.preventDefault();
+
+                    header.classList.remove('header-hidden');
+                    if (window.pageYOffset > 20) {
+                        header.classList.remove('at-top');
+                    }
 
                     const targetId = this.getAttribute('href');
-                    try {
-                        const targetElement = document.querySelector(targetId);
+                    let targetElement;
 
-                        if (targetElement) {
-                            // Calculate where to scroll to
-                            const elementPosition = targetElement.getBoundingClientRect().top;
-                            // Add window.pageYOffset to get position relative to document top
-                            const offsetPosition = window.pageYOffset + elementPosition - headerOffset;
-
-                            // Start the animation
-                            smoothScrollTo(offsetPosition, duration);
-                        } else {
-                            console.warn("Smooth scroll target element not found:", targetId);
-                        }
-                    } catch (error) {
-                        console.error("Error finding smooth scroll target:", targetId, error);
+                    if (targetId === '#contact') {
+                        targetElement = document.querySelector('footer'); // Target footer
+                    } else {
+                        targetElement = document.querySelector(targetId);
                     }
+
+                    try {
+                        if (targetElement) {
+                            lastScrollTop = window.pageYOffset; // Set last scroll position
+
+                            setTimeout(() => {
+                                const elementPosition = targetElement.getBoundingClientRect().top;
+                                const offsetPosition = window.pageYOffset + elementPosition - getHeaderOffset();
+                                smoothScrollTo(offsetPosition, duration);
+                            }, 50);
+                        } else { console.warn("Smooth scroll target element not found:", targetId); }
+                    } catch (error) { console.error("Error finding smooth scroll target:", targetId, error); }
                 });
             });
 
-            // --- Active Nav Link Highlighting Logic ---
-            const sections = document.querySelectorAll('section[id]');
-            // Offset for determining active section (slightly more than header height)
-            const highlightHeaderOffset = header ? header.offsetHeight + 50 : 100;
+            // --- Active Nav Link Highlighting ---
+            const highlightHeaderOffset = getHeaderOffset() + 30;
 
             function highlightNavLink() {
                 let currentSectionId = '';
                 const scrollPosition = window.pageYOffset;
-
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop - highlightHeaderOffset;
                     const sectionHeight = section.offsetHeight;
-                    // Check if scroll position is within this section's bounds
                     if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                         currentSectionId = '#' + section.getAttribute('id');
+                        if (section.tagName === 'FOOTER') {
+                            currentSectionId = '#contact'; // Match the link
+                        }
                     }
                 });
-
-                // Special case for reaching the bottom of the page
-                // If scrolled near the bottom, highlight the last link
-                if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 5) { // 5px tolerance
+                if ((window.innerHeight + scrollPosition) >= document.body.offsetHeight - 10) {
                     const lastSection = sections[sections.length - 1];
                     if (lastSection) {
                         currentSectionId = '#' + lastSection.getAttribute('id');
+                        if (lastSection.tagName === 'FOOTER') {
+                            currentSectionId = '#contact';
+                        }
                     }
                 }
-
-                // Update active class on nav links
                 navLinks.forEach(link => {
                     link.classList.remove('active-nav-link');
-                    // Check if the link's href matches the currentSectionId
                     if (link.getAttribute('href') === currentSectionId) {
                         link.classList.add('active-nav-link');
                     }
                 });
             }
-
-
-            // Add scroll event listener
             window.addEventListener('scroll', highlightNavLink);
-
-            // Initial call to highlight the correct link on page load
             highlightNavLink();
 
+            // --- Scroll Reveal ---
+            const revealElements = document.querySelectorAll(
+                '.menu-container, .lunch-box-content, .specials-container, .about-content, .footer-content-wrapper, .special-image, .about-image'
+            );
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.1
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
         });
     </script>
 </body>
