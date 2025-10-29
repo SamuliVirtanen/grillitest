@@ -274,6 +274,15 @@
             letter-spacing: 0.5px;
         }
 
+        /* --- NEW: Subtext for H3 --- */
+        .menu-category h3 .h3-subtext {
+            font-size: 0.6em;
+            font-weight: 400;
+            color: var(--dark-grey);
+            text-transform: none;
+            vertical-align: middle;
+        }
+
         .menu-item {
             display: flex;
             flex-direction: column;
@@ -300,6 +309,12 @@
         .item-name {
             color: var(--text-color);
             font-weight: 600;
+        }
+
+        /* --- NEW: Chili item style --- */
+        .menu-item .item-chili {
+            color: var(--primary-red-readable);
+            font-weight: 700;
         }
 
         .item-price {
@@ -453,17 +468,11 @@
         }
 
         .special-image {
-            width: 100%;
-            height: 160px;
-            overflow: hidden;
-            background-color: var(--light-grey);
+            /* Removed */
         }
 
         .special-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            /* Removed */
         }
 
         .special-content {
@@ -482,6 +491,25 @@
             margin: 0 0 1rem 0;
         }
 
+        /* --- NEW: Annokset styles --- */
+        .special-content h3 .chili-icon {
+            color: var(--primary-red);
+            margin-left: 5px;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            /* Use standard font */
+        }
+
+        .sisaltaa-mausteet {
+            font-size: 0.85em;
+            font-style: italic;
+            color: var(--dark-grey);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            /* Align left */
+        }
+
         .special-ingredients {
             list-style: none;
             padding: 0;
@@ -493,6 +521,13 @@
             display: inline-block;
             flex-grow: 1;
         }
+
+        .sisaltaa-mausteet+.special-ingredients {
+            margin-top: 0;
+            /* Remove top margin if it follows 'sisaltaa' */
+        }
+
+        /* --- END NEW --- */
 
         .special-ingredients li {
             margin-bottom: 0.4rem;
@@ -551,23 +586,67 @@
         .about-text p {
             font-size: 1.05em;
             line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
-        .about-image {
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-image-stack {
             flex: 1;
             min-width: 300px;
             max-width: 400px;
-            text-align: center;
+            position: relative;
+            min-height: 350px;
+            margin: 2rem 0;
+        }
+
+        .about-image {
+            position: absolute;
+            width: 85%;
+            border: 5px solid var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
+        }
+
+        .about-image:first-child {
+            top: 0;
+            left: 0;
+            transform: rotate(-5deg) scale(0.95);
+            z-index: 1;
+        }
+
+        .about-image:last-child {
+            top: 40px;
+            right: 0;
+            left: auto;
+            width: 75%;
+            transform: rotate(4deg) scale(0.95);
+            z-index: 2;
         }
 
         .about-image img {
             max-width: 100%;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: block;
         }
 
-        /* --- Scroll Reveal Styling --- */
-        /* Animate content wrappers/boxes */
+        .about-image:first-child.visible {
+            opacity: 1;
+            transform: rotate(-5deg) scale(1);
+        }
+
+        .about-image:last-child.visible {
+            opacity: 1;
+            transform: rotate(4deg) scale(1);
+        }
+
+
+        /* Scroll Reveal Styling */
         .menu-container,
         .lunch-box-content,
         .specials-container,
@@ -578,39 +657,32 @@
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        /* Animate image containers */
-        .special-image,
-        .about-image {
+        .special-image {
+            /* Keep .special-image rule for reveal */
             opacity: 0;
-            /* Start invisible */
             transform: scale(0.95);
-            /* Start slightly small */
             transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
-            /* Delay image effect */
         }
 
-        /* The 'visible' class added by JS */
         .menu-container.visible,
         .lunch-box-content.visible,
         .specials-container.visible,
         .about-content.visible,
         .footer-content-wrapper.visible {
-            /* Added footer wrapper */
             opacity: 1;
             transform: translateY(0);
         }
 
-        .special-image.visible,
-        .about-image.visible {
+        .special-image.visible {
+            /* Keep .special-image.visible rule */
             opacity: 1;
             transform: scale(1);
         }
 
-        /* --- END Scroll Reveal Styling --- */
+        /* END Scroll Reveal Styling */
 
-        /* --- Footer Styling --- */
+        /* Footer Styling */
         footer {
-            /* This is now the contact section */
             background-color: var(--secondary-black);
             color: var(--light-grey);
             padding: 3rem 2rem 2rem 2rem;
@@ -722,7 +794,7 @@
             border-top: 1px solid var(--dark-grey);
         }
 
-        /* --- END Footer Styling --- */
+        /* END Footer Styling */
 
 
         /* Responsive adjustments */
@@ -802,9 +874,29 @@
                 max-width: 90%;
             }
 
-            .about-image {
-                max-width: 80%;
-                margin-top: 1rem;
+            .about-image-stack {
+                min-height: 300px;
+                margin-bottom: 1rem;
+            }
+
+            .about-image:first-child {
+                width: 80%;
+                transform: rotate(-4deg) scale(0.95);
+            }
+
+            .about-image:last-child {
+                width: 70%;
+                right: 5%;
+                top: 40px;
+                transform: rotate(5deg) scale(0.95);
+            }
+
+            .about-image:first-child.visible {
+                transform: rotate(-4deg) scale(1);
+            }
+
+            .about-image:last-child.visible {
+                transform: rotate(5deg) scale(1);
             }
 
             #contact {
@@ -911,6 +1003,19 @@
             .menu-column {
                 width: 100%;
             }
+
+            .about-image-stack {
+                min-height: 250px;
+            }
+
+            .about-image:first-child {
+                width: 75%;
+            }
+
+            .about-image:last-child {
+                width: 65%;
+                top: 30px;
+            }
         }
     </style>
 </head>
@@ -920,8 +1025,8 @@
         <nav>
             <ul>
                 <li><a href="#menu">Hinnasto</a></li>
+                <li><a href="#specials">Annokset</a></li>
                 <li><a href="#lunch-deals">Lounaslistat</a></li>
-                <li><a href="#specials">Ateriat</a></li>
                 <li><a href="#about">Meistä</a></li>
                 <li><a href="#contact">Yhteystiedot</a></li>
             </ul>
@@ -933,7 +1038,7 @@
             <span class="grilli-part">Grilli</span>
             <span class="kipsa-part">KIPSA</span>
         </div>
-        <p>Maukkaimmat herkut aamusta yöhön!</p>
+        <p>Maukkaimmat perinteiset grilliherkut!</p>
     </div>
 
     <section id="menu">
@@ -941,120 +1046,397 @@
         <div class="menu-container">
             <div class="menu-column">
                 <div class="menu-category">
-                    <h3>Hampurilaiset</h3>
+                    <h3>Lihapiirakka</h3>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Klassinen hampurilainen</span> <span
-                                class="item-price">8,50€</span> </div>
+                        <div class="item-main"><span class="item-name">Lihapiirakka</span><span
+                                class="item-price">3,20€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Juustohampurilainen</span> <span
-                                class="item-price">9,50€</span> </div>
+                        <div class="item-main"><span class="item-name">1 nakkia</span><span
+                                class="item-price">4,20€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Tuplahampurilainen</span> <span
-                                class="item-price">12,00€</span> </div>
+                        <div class="item-main"><span class="item-name">2 nakkia</span><span
+                                class="item-price">5,20€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">KIPSA Erikois</span> <span
-                                class="item-price">13,50€</span> </div>
+                        <div class="item-main"><span class="item-name">Höyrylenkillä</span><span
+                                class="item-price">5,70€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Kanahampurilainen</span> <span
-                                class="item-price">10,50€</span> </div>
+                        <div class="item-main"><span class="item-name">Balkanilla</span><span
+                                class="item-price">5,40€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Pihvillä</span><span
+                                class="item-price">5,00€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Pihvillä ja munalla</span><span
+                                class="item-price">6,00€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kinkku+muna</span><span
+                                class="item-price">5,70€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Täräys</span><span
+                                class="item-price">5,20€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Pekonipommi</span><span
+                                class="item-price">5,20€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Torkkari</span><span
+                                class="item-price">6,20€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kokolihalla</span><span
+                                class="item-price">7,40€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Herkullisihis aura</span><span
+                                class="item-price">8,80€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kebabilla</span><span
+                                class="item-price">7,30€</span></div>
                     </div>
                 </div>
                 <div class="menu-category">
-                    <h3>Grillilautanen</h3>
+                    <h3>Pitaleivät</h3>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Porsaankyljyslautanen</span> <span
-                                class="item-price">15,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Tonnikalapita</span><span
+                                class="item-price">7,50€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Makkaralautanen</span> <span
-                                class="item-price">12,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Kasvispita</span><span
+                                class="item-price">7,50€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Sekagrillilautanen</span> <span
-                                class="item-price">18,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Kanapita</span><span
+                                class="item-price">8,90€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kebabpita</span><span
+                                class="item-price">8,90€</span></div>
+                    </div>
+                </div>
+                <div class="menu-category">
+                    <h3>Muita herkkuja</h3>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Porilainen</span><span
+                                class="item-price">4,30€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Teuskan eväät</span><span
+                                class="item-price">4,30€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Omenapiirakka</span><span
+                                class="item-price">2,80€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name item-chili">Chilipiirakka</span><span
+                                class="item-price">4,20€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Hot dog</span><span
+                                class="item-price">4,00€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Nakki</span><span class="item-price">1,00€</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Höyrylenkki</span><span
+                                class="item-price">2,50€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Grillimakkara</span><span
+                                class="item-price">2,30€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Balkan</span><span
+                                class="item-price">2,20€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kebab riisillä</span><span
+                                class="item-price">9,00€</span></div>
                     </div>
                 </div>
             </div>
             <div class="menu-column">
                 <div class="menu-category">
-                    <h3>Kebabit & Rullat</h3>
+                    <h3>Ranskalaisannokset</h3>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Kebab riisillä</span> <span
-                                class="item-price">11,00€</span> </div>
+                        <div class="item-main"> <span class="item-name">Ranskalaiset</span> </div>
+                        <div class="size-options"> <span><span class="size-name">Pieni</span> <span
+                                    class="size-price">4,20€</span></span> <span><span class="size-name">Normaali</span>
+                                <span class="size-price">5,20€</span></span> <span><span class="size-name">Iso</span>
+                                <span class="size-price">6,20€</span></span> </div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Kebab ranskalaisilla</span> <span
-                                class="item-price">11,50€</span> </div>
+                        <div class="item-main"> <span class="item-name">Makkaraperunat</span> </div>
+                        <div class="size-options"> <span><span class="size-name">Pieni</span> <span
+                                    class="size-price">6,30€</span></span> <span><span class="size-name">Normaali</span>
+                                <span class="size-price">7,30€</span></span> <span><span class="size-name">Iso</span>
+                                <span class="size-price">9,30€</span></span> </div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Kebabrulla</span> <span
-                                class="item-price">12,50€</span> </div>
+                        <div class="item-main"> <span class="item-name">Lihapullaperunat</span> </div>
+                        <div class="size-options"> <span><span class="size-name">Pieni</span> <span
+                                    class="size-price">6,20€</span></span> <span><span class="size-name">Normaali</span>
+                                <span class="size-price">7,20€</span></span> <span><span class="size-name">Iso</span>
+                                <span class="size-price">9,20€</span></span> </div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Kanakebab</span> <span
-                                class="item-price">12,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Balkanperunat</span><span
+                                class="item-price">7,30€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kananugetit (nugeteilla)</span><span
+                                class="item-price">7,50€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kananugetit (fileillä)</span><span
+                                class="item-price">9,90€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Lihapullamakkaraperunat</span> </div>
+                        <div class="size-options"> <span><span class="size-name">Normaali</span> <span
+                                    class="size-price">8,30€</span></span> <span><span class="size-name">Iso</span>
+                                <span class="size-price">9,80€</span></span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kipsan erikoinen</span><span
+                                class="item-price">10,50€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Kebab ranskalaiset</span> </div>
+                        <div class="size-options"> <span><span class="size-name">Normaali</span> <span
+                                    class="size-price">8,30€</span></span> <span><span class="size-name">Iso</span>
+                                <span class="size-price">9,80€</span></span> </div>
                     </div>
                 </div>
                 <div class="menu-category">
-                    <h3>Hot Dogit</h3>
+                    <h3>Burgerit <span class="h3-subtext">(kokolihapihvillä)</span></h3>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Tavallinen Hot Dog</span> <span
-                                class="item-price">6,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Burgeri</span><span
+                                class="item-price">4,70€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Mega Hot Dog</span> <span
-                                class="item-price">8,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Pekoni</span><span
+                                class="item-price">5,70€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Tupla</span><span class="item-price">6,80€</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Super</span><span class="item-price">7,50€</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Tuplasuper</span><span
+                                class="item-price">5,50€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Reissu</span><span
+                                class="item-price">6,80€</span></div>
                     </div>
                 </div>
                 <div class="menu-category">
                     <h3>Juomat</h3>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Virvoitusjuomat</span> <span
-                                class="item-price">3,00€</span> </div>
+                        <div class="item-main"> <span class="item-name">Maito</span> </div>
+                        <div class="size-options"> <span><span class="size-name">0,2 l</span> <span
+                                    class="size-price">1,00€</span></span> <span><span class="size-name">0,5 l</span>
+                                <span class="size-price">1,40€</span></span> <span><span class="size-name">1,0 l</span>
+                                <span class="size-price">2,50€</span></span> </div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Kahvi/Tee</span> <span
-                                class="item-price">2,50€</span> </div>
+                        <div class="item-main"> <span class="item-name">Limsat</span> </div>
+                        <div class="size-options"> <span><span class="size-name">0,5 l</span> <span
+                                    class="size-price">3,50€</span></span> <span><span class="size-name">1,5 l</span>
+                                <span class="size-price">5,50€</span></span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Grandi</span><span
+                                class="item-price">1,20€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Tuoremehu</span><span
+                                class="item-price">4,50€</span></div>
                     </div>
                 </div>
             </div>
             <div class="menu-column">
                 <div class="menu-category">
-                    <h3>Pitaleivät</h3>
+                    <h3>Hampurilaiset</h3>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Pitaleipä Kebabilla</span> <span
-                                class="item-price">9,50€</span> </div>
+                        <div class="item-main"><span class="item-name">Hampurilainen</span><span
+                                class="item-price">4,00€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Pitaleipä Kanalla</span> <span
-                                class="item-price">9,50€</span> </div>
+                        <div class="item-main"><span class="item-name">Juusto</span><span
+                                class="item-price">4,70€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Pitaleipä Halloumilla</span> <span
-                                class="item-price">10,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Muna</span><span class="item-price">4,70€</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Ananas</span><span
+                                class="item-price">4,70€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kasvis</span><span
+                                class="item-price">4,50€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kana</span><span class="item-price">5,20€</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kerroshampurilainen</span><span
+                                class="item-price">6,00€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kebab hampurilainen</span><span
+                                class="item-price">8,00€</span></div>
                     </div>
                 </div>
                 <div class="menu-category">
-                    <h3>Snacksit</h3>
+                    <h3>Salaattiannokset</h3>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Ranskalaiset perunat</span> </div>
-                        <div class="size-options"> <span><span class="size-name">Pieni</span> <span
-                                    class="size-price">3,50€</span></span> <span><span class="size-name">Normaali</span>
-                                <span class="size-price">4,50€</span></span> <span><span class="size-name">Iso</span>
-                                <span class="size-price">6,00€</span></span> </div>
+                        <div class="item-main"><span class="item-name">Tonnikala</span><span
+                                class="item-price">7,80€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Sipulirenkaat</span> <span
-                                class="item-price">5,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Kinkku</span><span
+                                class="item-price">7,80€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Mozzarellatikut</span> <span
-                                class="item-price">6,00€</span> </div>
+                        <div class="item-main"><span class="item-name">Salaattijuusto</span><span
+                                class="item-price">8,00€</span></div>
                     </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kana</span><span class="item-price">8,00€</span>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Katkarapu</span><span
+                                class="item-price">8,60€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Kebab</span><span class="item-price">8,60€</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specials">
+        <h2>Annokset</h2>
+        <div class="specials-container">
+            <div class="special-item-card">
+                <div class="special-content">
+                    <h3>Savujuusto-chili<br>Burger</h3>
+                    <ul class="special-ingredients">
+                        <li>Kerrossämpylä</li>
+                        <li>2x45g Kokolihapihvi</li>
+                        <li>2 siivua savujuustoa</li>
+                        <li>Salaatti+ chilimajoneesi</li>
+                        <li>Paahdettu sipulirouhe</li>
+                    </ul>
+                    <div class="special-price"> 7.90€ </div>
+                </div>
+            </div>
+            <div class="special-item-card">
+                <div class="special-content">
+                    <h3>”Pikkunälkään”</h3>
+                    <ul class="special-ingredients">
+                        <li>Lihapullamakkaraperunat</li>
+                        <li>3 siivua pekonia</li>
+                        <li>Paistettu muna</li>
+                    </ul>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <ul class="special-ingredients">
+                        <li>sinappi, ketsuppi, kurkku ja sipuli</li>
+                        <li>salaatti + majoneesi</li>
+                    </ul>
+                    <div class="special-price"> 10,80€ </div>
+                </div>
+            </div>
+            <div class="special-item-card">
+                <div class="special-content">
+                    <h3>”ISOON nälkään”</h3>
+                    <ul class="special-ingredients">
+                        <li>Isot lihapulla-makkaraperunat (10 kpl lihapullia)</li>
+                        <li>Kebab-lihaa (180g)</li>
+                        <li>Aura- TAI Salaattijuusto</li>
+                    </ul>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <ul class="special-ingredients">
+                        <li>sinappi, ketsuppi, kurkku ja sipuli</li>
+                        <li>Salaatti + majoneesi ja kebabkastike</li>
+                    </ul>
+                    <div class="special-price"> 18,00€ </div>
+                </div>
+            </div>
+            <div class="special-item-card">
+                <div class="special-content">
+                    <h3>”Pepper Jack” Burger</h3>
+                    <ul class="special-ingredients">
+                        <li>Iso sämpylä</li>
+                        <li>125g Kokolihapihvi</li>
+                        <li>2 siivua Pepper Jack juustoa</li>
+                        <li>1 siivu Wurster makkaraa</li>
+                        <li>2 siivua pekonia</li>
+                        <li>Ananasrengas</li>
+                    </ul>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <ul class="special-ingredients">
+                        <li>sinappi, ketsuppi, kurkku ja sipuli</li>
+                        <li>salaatti, tomaatti ja majoneesi</li>
+                    </ul>
+                    <div class="special-price"> 9,80€ </div>
+                </div>
+            </div>
+            <div class="special-item-card">
+                <div class="special-content">
+                    <h3>Tuhti piirakka</h3>
+                    <ul class="special-ingredients">
+                        <li>Lihapiirakka</li>
+                        <li>2 siivua Wurster makkaraa</li>
+                        <li>Jauhelihapihvi</li>
+                        <li>Muna</li>
+                        <li>Juusto</li>
+                    </ul>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <ul class="special-ingredients">
+                        <li>sinappi, ketsuppi, kurkku ja sipuli</li>
+                    </ul>
+                    <div class="special-price"> 8,80€ </div>
+                </div>
+            </div>
+            <div class="special-item-card">
+                <div class="special-content">
+                    <h3>Hotti piirakka <span class="chili-icon">🌶️</span></h3>
+                    <ul class="special-ingredients">
+                        <li>Chili lihapiirakka</li>
+                        <li>Kebab lihaa</li>
+                        <li>Pepper Jack juusto</li>
+                    </ul>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <ul class="special-ingredients">
+                        <li>sinappi, ketsuppi, kurkku ja sipuli</li>
+                        <li>Salaatti, chili majoneesi</li>
+                    </ul>
+                    <div class="special-price"> 8,90€ </div>
                 </div>
             </div>
         </div>
@@ -1088,82 +1470,27 @@
             <p class="lunch-special-note">- Lounastajille jälkkärikahvit!</p>
         </div>
     </section>
-
-    <section id="specials">
-        <h2>Ateriat</h2>
-        <div class="specials-container">
-            <div class="special-item-card">
-                <div class="special-image"> <img src="./img/testateria.jpg" alt="Savujuusto-chili Burger"> </div>
-                <div class="special-content">
-                    <h3>Savujuusto-chili<br>Burger</h3>
-                    <ul class="special-ingredients">
-                        <li>Kerrossämpylä</li>
-                        <li>2x45g Kokolihapihvi</li>
-                        <li>2 siivua savujuustoa</li>
-                        <li>Salaatti+ chilimajoneesi</li>
-                        <li>Paahdettu sipulirouhe</li>
-                    </ul>
-                    <div class="special-price"> 5,00€ </div>
-                </div>
-            </div>
-            <div class="special-item-card">
-                <div class="special-image"> <img src="./img/testateria.jpg" alt="Tuplajuusto Pekoni"> </div>
-                <div class="special-content">
-                    <h3>Tuplajuusto<br>Pekoni</h3>
-                    <ul class="special-ingredients">
-                        <li>Kerrossämpylä</li>
-                        <li>2x45g Pihvi</li>
-                        <li>2 siivua juustoa</li>
-                        <li>Pekonia</li>
-                        <li>Paahdettu sipulirouhe</li>
-                    </ul>
-                    <div class="special-price"> 6,50€ </div>
-                </div>
-            </div>
-            <div class="special-item-card">
-                <div class="special-image"> <img src="./img/testateria.jpg" alt="Halloumi Ranskalaiset"> </div>
-                <div class="special-content">
-                    <h3>Halloumi<br>Ranskalaiset</h3>
-                    <ul class="special-ingredients">
-                        <li>Ranskalaiset</li>
-                        <li>Halloumitikkuja</li>
-                        <li>Salaattia</li>
-                        <li>Chilimajoneesi</li>
-                        <li>Makea chilikastike</li>
-                    </ul>
-                    <div class="special-price"> 7,00€ </div>
-                </div>
-            </div>
-            <div class="special-item-card">
-                <div class="special-image"> <img src="./img/testateria.jpg" alt="Kananugetti Ateria"> </div>
-                <div class="special-content">
-                    <h3>Kananugetti<br>Ateria</h3>
-                    <ul class="special-ingredients">
-                        <li>6 kpl Kananugettia</li>
-                        <li>Ranskalaiset</li>
-                        <li>Salaattia</li>
-                        <li>Currymajoneesi</li>
-                        <li>0.33l Juoma</li>
-                    </ul>
-                    <div class="special-price"> 8,50€ </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="about">
         <h2>Meistä</h2>
         <div class="about-content">
             <div class="about-text">
-                <p>Tervetuloa <strong>Grilli KIPSAan</strong>, missä intohimo grillaamiseen kohtaa tuoreimmat
-                    raaka-aineet! Sitoutuneena kulinaariseen erinomaisuuteen, olemme tarjoilleet herkullisia
-                    grilliruokia yhteisöllemme jo vuosia. Salaisuutemme? Omistautuminen laadulle, ainutlaatuiset
-                    marinadit ja kodikas ilmapiiri, joka tekee jokaisesta ateriasta erityisen tilaisuuden.</p>
-                <p>Mehevistä hampurilaisista meheviin vartaisiin, ruokalistamme on suunniteltu ilahduttamaan jokaista
-                    makuaistia. Uskomme hyvään ruokaan, hyvään seuraan ja unohtumattomien ruokailukokemusten luomiseen.
+                <p><strong>Grilli-Kipsa – tai kuten nuoret sanovat, “Anttilan Mäkki” –</strong> on vuonna 1979
+                    perustettu perinteikäs grillikioski, joka on palvellut nälkäisiä asiakkaita jo useiden sukupolvien
+                    ajan.</p>
+                <p>Alusta lähtien tavoitteena on ollut tarjota herkullista, rehellistä grilliruokaa – tuoreista
+                    raaka-aineista, ystävällisellä palvelulla ja reilulla asenteella.</p>
+                <p>Vuosien varrella Kouvolan Grilli-Kipsa on säilyttänyt perinteensä, mutta kasvanut ja uudistunut
+                    asiakkaiden mukana. Klassikoiden, kuten lihapiirakoiden, grillimakkaran, hampurilaisten ja
+                    ranskanperunoiden, rinnalle on tuotu uusia makuja, jotka pitävät menun raikkaana ja ajan hermolla.
                 </p>
+                <p>Kouvolan Grilli-Kipsa on edelleen paikallinen kohtaamispaikka, jossa yhdistyvät lämpimät muistot ja
+                    hyvä ruoka. Meille tärkeintä on, että jokainen asiakas lähtee tyytyväisenä – vatsat täynnä ja hymy
+                    huulilla</p>
             </div>
-            <div class="about-image"> <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat"> </div>
+            <div class="about-image-stack">
+                <div class="about-image"> <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat 1"> </div>
+                <div class="about-image"> <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat 2"> </div>
+            </div>
         </div>
     </section>
 
@@ -1173,20 +1500,19 @@
             <div class="footer-column footer-left">
                 <h3>Aukioloajat</h3>
                 <div class="opening-hours">
-                    <p data-day="1">Ma: 11:00 - 22:00</p>
-                    <p data-day="2">Ti: 11:00 - 22:00</p>
-                    <p data-day="3">Ke: 11:00 - 22:00</p>
-                    <p data-day="4">To: 11:00 - 22:00</p>
-                    <p data-day="5">Pe: 11:00 - 23:00</p>
-                    <p data-day="6">La: 12:00 - 23:00</p>
-                    <p data-day="0">Su: 12:00 - 21:00</p>
+                    <p data-day="1">Ma: 10:30 – 22:00</p>
+                    <p data-day="2">Ti: 10.30 – 22:00</p>
+                    <p data-day="3">Ke: 10.30 – 22:00</p>
+                    <p data-day="4">To: 10.30 – 22:00</p>
+                    <p data-day="5">Pe: 10.30 – 04:00</p>
+                    <p data-day="6">La: 12:00 – 04:00</p>
+                    <p data-day="0">Su: 13:00 – 22:00</p>
                 </div>
-
                 <h3 style="margin-top: 2rem;">Yhteystiedot</h3>
-                <p>+123 456 789</p>
+                <p>05 3121866</p>
                 <p>info@grillikipsa.com</p>
                 <div class="contact-social-icon">
-                    <a href="https://www.facebook.com/your-grillikipsa-page" target="_blank" rel="noopener noreferrer"
+                    <a href="https://www.facebook.com/grillikipsa" target="_blank" rel="noopener noreferrer"
                         aria-label="Löydä meidät Facebookista">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path
@@ -1197,7 +1523,7 @@
             </div>
             <div class="footer-column footer-right">
                 <h3>Sijainti</h3>
-                <p>123 Grillikatu, BBQ-kaupunki, 12345</p>
+                <p>Kouvolankatu 17, 45100 Kouvola</p>
                 <div class="map-container">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d817.684742671894!2d26.70812835513835!3d60.8680265948975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4691b257d7b868a5%3A0x52200509f968f982!2sGrilli-Kipsa!5e0!3m2!1sfi!2sfi!4v1761010979095!5m2!1sfi!2sfi"
@@ -1222,20 +1548,16 @@
             // --- Header Transition & Hide/Show on Scroll ---
             function handleHeaderScroll() {
                 if (isNavScrolling) {
-                    return; // Don't run hide/show logic if we are auto-scrolling
+                    return;
                 }
-
                 let currentScrollTop = window.pageYOffset;
                 let hideThreshold = menuSection ? menuSection.offsetTop - (header.offsetHeight * 2) : 300;
 
-                // 1. Full-width vs. Floating state
                 if (currentScrollTop <= 20) {
                     header.classList.add('at-top');
                 } else {
                     header.classList.remove('at-top');
                 }
-
-                // 2. Hide/Show Logic
                 if (currentScrollTop > lastScrollTop && currentScrollTop > hideThreshold) {
                     header.classList.add('header-hidden');
                 } else {
@@ -1244,7 +1566,7 @@
                 lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
             }
             window.addEventListener('scroll', handleHeaderScroll);
-            handleHeaderScroll(); // Initial check
+            handleHeaderScroll();
 
             // --- Smooth Scrolling ---
             function getHeaderOffset() {
@@ -1259,7 +1581,7 @@
 
             function easeInOutQuad(t, b, c, d) { t /= d / 2; if (t < 1) return c / 2 * t * t + b; t--; return -c / 2 * (t * (t - 2) - 1) + b; }
             function smoothScrollTo(targetPosition, scrollDuration) {
-                isNavScrolling = true; // Set flag
+                isNavScrolling = true;
                 const startPosition = window.pageYOffset;
                 const distance = targetPosition - startPosition;
                 let startTime = null;
@@ -1272,11 +1594,9 @@
                     if (timeElapsed < scrollDuration) {
                         requestAnimationFrame(animationStep);
                     } else {
-                        // Scroll finished
-                        setTimeout(() => { // Add a delay
-                            isNavScrolling = false; // Unset flag
-                            lastScrollTop = window.pageYOffset; // Update to *actual* final position
-                            handleHeaderScroll(); // Run handler once
+                        setTimeout(() => {
+                            isNavScrolling = false;
+                            lastScrollTop = window.pageYOffset;
                         }, 100); // 100ms buffer
                     }
                 }
@@ -1286,7 +1606,6 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
                     e.preventDefault();
-
                     header.classList.remove('header-hidden');
                     if (window.pageYOffset > 20) {
                         header.classList.remove('at-top');
@@ -1303,8 +1622,7 @@
 
                     try {
                         if (targetElement) {
-                            lastScrollTop = window.pageYOffset; // Set last scroll position
-
+                            lastScrollTop = window.pageYOffset;
                             setTimeout(() => {
                                 const elementPosition = targetElement.getBoundingClientRect().top;
                                 const offsetPosition = window.pageYOffset + elementPosition - getHeaderOffset();
@@ -1325,19 +1643,13 @@
                     const sectionTop = section.offsetTop - highlightHeaderOffset;
                     const sectionHeight = section.offsetHeight;
                     if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                        currentSectionId = '#' + section.getAttribute('id');
-                        if (section.tagName === 'FOOTER') {
-                            currentSectionId = '#contact'; // Match the link
-                        }
+                        currentSectionId = '#' + (section.tagName === 'FOOTER' ? 'contact' : section.getAttribute('id'));
                     }
                 });
                 if ((window.innerHeight + scrollPosition) >= document.body.offsetHeight - 10) {
                     const lastSection = sections[sections.length - 1];
                     if (lastSection) {
-                        currentSectionId = '#' + lastSection.getAttribute('id');
-                        if (lastSection.tagName === 'FOOTER') {
-                            currentSectionId = '#contact';
-                        }
+                        currentSectionId = '#' + (lastSection.tagName === 'FOOTER' ? 'contact' : lastSection.getAttribute('id'));
                     }
                 }
                 navLinks.forEach(link => {
