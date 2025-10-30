@@ -29,7 +29,6 @@
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            /* --- MODIFIED: Palautettu --- */
             padding-top: 100px;
             /* Space for fixed header */
             box-sizing: border-box;
@@ -60,6 +59,7 @@
             border-radius: 50px;
             z-index: 1000;
             box-sizing: border-box;
+            /* --- MODIFIED: Removed layout properties from transition --- */
             transition: top 0.4s ease,
                 background-color 0.4s ease,
                 backdrop-filter 0.4s ease,
@@ -79,10 +79,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        header.header-hidden {
-            top: -120px;
-            box-shadow: none;
-        }
+        /* --- REMOVED: .header-hidden class --- */
 
         /* END Header Styling */
 
@@ -131,16 +128,13 @@
             color: var(--white);
             text-align: center;
             padding: 4rem 2rem;
-            /* --- MODIFIED: Hero Height --- */
             min-height: 65vh;
-            /* --- END MODIFIED --- */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             border-bottom: 4px solid var(--primary-red-readable);
-            /* --- MODIFIED: Palautettu --- */
             margin-top: -100px;
         }
 
@@ -660,6 +654,7 @@
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
+        /* MODIFIED: Image Reveal (FIXED) */
         .special-image,
         .about-image {
             opacity: 0;
@@ -682,7 +677,7 @@
             transform: scale(1);
         }
 
-        /* --- END Scroll Reveal Styling --- */
+        /* --- END MODIFIED --- */
 
         /* --- Footer Styling --- */
         footer {
@@ -899,16 +894,12 @@
 
             #about-img-1 {
                 width: 75%;
-                /* MODIFIED */
                 height: 220px;
-                /* MODIFIED */
             }
 
             #about-img-2 {
                 width: 100%;
-                /* MODIFIED */
                 height: 255px;
-                /* MODIFIED */
                 top: auto;
                 right: auto;
             }
