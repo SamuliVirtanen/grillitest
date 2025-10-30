@@ -23,11 +23,13 @@
             --menu-bg: #ffffff;
             --menu-border: #e0e0e0;
             --header-top-offset: 1rem;
+            --menu-item-odd-bg: #fdfdfd;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
+            /* --- MODIFIED: Palautettu --- */
             padding-top: 100px;
             /* Space for fixed header */
             box-sizing: border-box;
@@ -129,13 +131,16 @@
             color: var(--white);
             text-align: center;
             padding: 4rem 2rem;
-            min-height: 60vh;
+            /* --- MODIFIED: Hero Height --- */
+            min-height: 65vh;
+            /* --- END MODIFIED --- */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             border-bottom: 4px solid var(--primary-red-readable);
+            /* --- MODIFIED: Palautettu --- */
             margin-top: -100px;
         }
 
@@ -272,9 +277,15 @@
             border-bottom: 2px solid var(--primary-red-readable);
             padding-bottom: 0.5rem;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0;
         }
 
-        /* --- NEW: Subtext for H3 --- */
+        .menu-category h3 svg {
+            display: none;
+        }
+
         .menu-category h3 .h3-subtext {
             font-size: 0.6em;
             font-weight: 400;
@@ -292,6 +303,7 @@
             font-size: 0.95em;
             position: relative;
             border-bottom: 1px solid var(--menu-border);
+            transition: background-color 0.2s ease;
         }
 
         .menu-item:last-child {
@@ -311,10 +323,9 @@
             font-weight: 600;
         }
 
-        /* --- NEW: Chili item style --- */
         .menu-item .item-chili {
-            color: var(--primary-red-readable);
-            font-weight: 700;
+            color: var(--text-color);
+            font-weight: 600;
         }
 
         .item-price {
@@ -354,8 +365,8 @@
             background-color: var(--white);
             overflow: hidden;
             text-align: left;
-            border-radius: 0;
-            box-shadow: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .lunch-title {
@@ -364,7 +375,7 @@
             font-size: 2.2em;
             font-weight: 700;
             text-align: center;
-            text-transform: uppercase;
+            text-transform: none;
             padding: 1.5rem;
             background-color: #f0f0f0;
             border-bottom: 1px solid var(--menu-border);
@@ -378,6 +389,7 @@
 
         .lunch-items {
             padding: 1.5rem 2rem;
+            display: block;
         }
 
         .lunch-item {
@@ -389,6 +401,10 @@
             border-bottom: 1px dotted var(--dark-grey);
             font-size: 1.1em;
             line-height: 1.2;
+        }
+
+        .lunch-items .lunch-item:last-of-type {
+            border-bottom: none;
         }
 
         .item-name-box {
@@ -427,6 +443,7 @@
             margin-top: 1.5rem;
             padding: 0 2rem 1rem;
             text-align: center;
+            display: block;
         }
 
         /* Special Deal Section */
@@ -450,13 +467,15 @@
             justify-content: center;
             gap: 2rem;
             width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
             padding-bottom: 0;
         }
 
         .special-item-card {
             flex: 1;
-            min-width: 240px;
-            max-width: 280px;
+            min-width: 280px;
+            max-width: 320px;
             border: 2px solid var(--primary-red);
             background-color: var(--white);
             overflow: hidden;
@@ -464,7 +483,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 0;
+            border-radius: 8px;
         }
 
         .special-image {
@@ -476,7 +495,7 @@
         }
 
         .special-content {
-            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -491,23 +510,23 @@
             margin: 0 0 1rem 0;
         }
 
-        /* --- NEW: Annokset styles --- */
         .special-content h3 .chili-icon {
             color: var(--primary-red);
             margin-left: 5px;
             display: inline-block;
             font-family: 'Montserrat', sans-serif;
-            /* Use standard font */
         }
 
         .sisaltaa-mausteet {
             font-size: 0.85em;
             font-style: italic;
             color: var(--dark-grey);
-            margin-top: 1rem;
+            margin-top: auto;
+            /* Push to bottom */
+            padding-top: 1rem;
+            /* Add space above it */
             margin-bottom: 0.5rem;
             text-align: left;
-            /* Align left */
         }
 
         .special-ingredients {
@@ -519,29 +538,17 @@
             font-weight: 600;
             color: var(--text-color);
             display: inline-block;
+            flex-grow: 0;
+        }
+
+        .special-ingredients.main-list {
             flex-grow: 1;
+            /* This list grows */
         }
 
         .sisaltaa-mausteet+.special-ingredients {
             margin-top: 0;
-            /* Remove top margin if it follows 'sisaltaa' */
-        }
-
-        /* --- END NEW --- */
-
-        .special-ingredients li {
-            margin-bottom: 0.4rem;
-            position: relative;
-            padding-left: 1.2rem;
-        }
-
-        .special-ingredients li::before {
-            content: '-';
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-weight: 700;
-            color: var(--secondary-black);
+            flex-grow: 0;
         }
 
         .special-price {
@@ -550,7 +557,7 @@
             font-weight: 700;
             color: var(--secondary-black);
             line-height: 1;
-            margin-top: auto;
+            margin-top: 0.5rem;
         }
 
         /* About Section */
@@ -595,58 +602,54 @@
 
         .about-image-stack {
             flex: 1;
-            min-width: 300px;
-            max-width: 400px;
+            min-width: 320px;
+            max-width: 450px;
             position: relative;
-            min-height: 350px;
-            margin: 2rem 0;
+            min-height: 420px;
+            margin: 1rem;
         }
 
         .about-image {
             position: absolute;
-            width: 85%;
-            border: 5px solid var(--white);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             border-radius: 8px;
             opacity: 0;
             transform: scale(0.95);
-            transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
-        }
-
-        .about-image:first-child {
-            top: 0;
-            left: 0;
-            transform: rotate(-5deg) scale(0.95);
-            z-index: 1;
-        }
-
-        .about-image:last-child {
-            top: 40px;
-            right: 0;
-            left: auto;
-            width: 75%;
-            transform: rotate(4deg) scale(0.95);
-            z-index: 2;
+            transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s, top 0.5s ease-out, left 0.5s ease-out, right 0.5s ease-out;
+            border: 5px solid var(--white);
         }
 
         .about-image img {
             max-width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 8px;
             display: block;
         }
 
-        .about-image:first-child.visible {
-            opacity: 1;
-            transform: rotate(-5deg) scale(1);
+        #about-img-1 {
+            width: 70%;
+            height: 280px;
+            top: -60px;
+            left: 0;
+            z-index: 1;
         }
 
-        .about-image:last-child.visible {
-            opacity: 1;
-            transform: rotate(4deg) scale(1);
+        #about-img-2 {
+            width: 95%;
+            height: 240px;
+            top: 260px;
+            right: 0;
+            left: auto;
+            z-index: 2;
         }
 
+        .about-image.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
 
-        /* Scroll Reveal Styling */
+        /* --- Scroll Reveal Styling --- */
         .menu-container,
         .lunch-box-content,
         .specials-container,
@@ -657,8 +660,8 @@
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        .special-image {
-            /* Keep .special-image rule for reveal */
+        .special-image,
+        .about-image {
             opacity: 0;
             transform: scale(0.95);
             transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
@@ -673,15 +676,15 @@
             transform: translateY(0);
         }
 
-        .special-image.visible {
-            /* Keep .special-image.visible rule */
+        .special-image.visible,
+        .about-image.visible {
             opacity: 1;
             transform: scale(1);
         }
 
-        /* END Scroll Reveal Styling */
+        /* --- END Scroll Reveal Styling --- */
 
-        /* Footer Styling */
+        /* --- Footer Styling --- */
         footer {
             background-color: var(--secondary-black);
             color: var(--light-grey);
@@ -711,6 +714,15 @@
             margin-bottom: 1rem;
             border-bottom: 1px solid var(--dark-grey);
             padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        footer h3 svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--white);
         }
 
         .footer-content-wrapper {
@@ -741,14 +753,7 @@
             color: var(--light-grey);
         }
 
-        .footer-column .opening-hours strong {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--white);
-        }
-
         .footer-column a {
-            /* Style for *actual* links in footer */
             color: var(--white);
             text-decoration: none;
             transition: text-decoration 0.3s ease;
@@ -794,7 +799,7 @@
             border-top: 1px solid var(--dark-grey);
         }
 
-        /* END Footer Styling */
+        /* --- END Footer Styling --- */
 
 
         /* Responsive adjustments */
@@ -875,34 +880,45 @@
             }
 
             .about-image-stack {
-                min-height: 300px;
-                margin-bottom: 1rem;
+                min-height: auto;
+                width: 90%;
+                margin: 1rem 0 0 0;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                align-items: center;
+                position: static;
             }
 
-            .about-image:first-child {
-                width: 80%;
-                transform: rotate(-4deg) scale(0.95);
+            .about-image {
+                position: static;
+                transform: scale(0.95);
+                opacity: 0;
+                width: 100%;
             }
 
-            .about-image:last-child {
-                width: 70%;
-                right: 5%;
-                top: 40px;
-                transform: rotate(5deg) scale(0.95);
+            #about-img-1 {
+                width: 75%;
+                /* MODIFIED */
+                height: 220px;
+                /* MODIFIED */
             }
 
-            .about-image:first-child.visible {
-                transform: rotate(-4deg) scale(1);
+            #about-img-2 {
+                width: 100%;
+                /* MODIFIED */
+                height: 255px;
+                /* MODIFIED */
+                top: auto;
+                right: auto;
             }
 
-            .about-image:last-child.visible {
-                transform: rotate(5deg) scale(1);
+            .about-image.visible {
+                transform: scale(1);
+                opacity: 1;
             }
 
-            #contact {
-                max-width: 90%;
-                padding: 2rem 1.5rem;
-            }
+            /* Removed the incorrect #contact max-width rule */
 
             .lunch-title {
                 font-size: 1.8em;
@@ -915,15 +931,22 @@
 
             .lunch-item {
                 font-size: 1em;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-name-box {
+                margin-bottom: 0.5rem;
             }
 
             .lunch-item .item-price {
                 font-size: 1.1em;
+                margin-left: 0;
             }
 
             .lunch-special-note {
                 font-size: 0.9em;
-                padding: 0 1.5rem 1.5rem 1.5rem;
+                padding: 1rem 1.5rem 1.5rem 1.5rem;
             }
 
             .specials-container {
@@ -1002,19 +1025,6 @@
 
             .menu-column {
                 width: 100%;
-            }
-
-            .about-image-stack {
-                min-height: 250px;
-            }
-
-            .about-image:first-child {
-                width: 75%;
-            }
-
-            .about-image:last-child {
-                width: 65%;
-                top: 30px;
             }
         }
     </style>
@@ -1246,6 +1256,10 @@
                         <div class="item-main"><span class="item-name">Reissu</span><span
                                 class="item-price">6,80€</span></div>
                     </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Sekagrillilautanen</span><span
+                                class="item-price">18,00€</span></div>
+                    </div>
                 </div>
                 <div class="menu-category">
                     <h3>Juomat</h3>
@@ -1345,7 +1359,7 @@
             <div class="special-item-card">
                 <div class="special-content">
                     <h3>Savujuusto-chili<br>Burger</h3>
-                    <ul class="special-ingredients">
+                    <ul class="special-ingredients main-list">
                         <li>Kerrossämpylä</li>
                         <li>2x45g Kokolihapihvi</li>
                         <li>2 siivua savujuustoa</li>
@@ -1358,12 +1372,12 @@
             <div class="special-item-card">
                 <div class="special-content">
                     <h3>”Pikkunälkään”</h3>
-                    <ul class="special-ingredients">
+                    <ul class="special-ingredients main-list">
                         <li>Lihapullamakkaraperunat</li>
                         <li>3 siivua pekonia</li>
                         <li>Paistettu muna</li>
                     </ul>
-                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet:</div>
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                         <li>salaatti + majoneesi</li>
@@ -1374,12 +1388,12 @@
             <div class="special-item-card">
                 <div class="special-content">
                     <h3>”ISOON nälkään”</h3>
-                    <ul class="special-ingredients">
+                    <ul class="special-ingredients main-list">
                         <li>Isot lihapulla-makkaraperunat (10 kpl lihapullia)</li>
                         <li>Kebab-lihaa (180g)</li>
                         <li>Aura- TAI Salaattijuusto</li>
                     </ul>
-                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet:</div>
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                         <li>Salaatti + majoneesi ja kebabkastike</li>
@@ -1390,7 +1404,7 @@
             <div class="special-item-card">
                 <div class="special-content">
                     <h3>”Pepper Jack” Burger</h3>
-                    <ul class="special-ingredients">
+                    <ul class="special-ingredients main-list">
                         <li>Iso sämpylä</li>
                         <li>125g Kokolihapihvi</li>
                         <li>2 siivua Pepper Jack juustoa</li>
@@ -1398,7 +1412,7 @@
                         <li>2 siivua pekonia</li>
                         <li>Ananasrengas</li>
                     </ul>
-                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet:</div>
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                         <li>salaatti, tomaatti ja majoneesi</li>
@@ -1409,14 +1423,14 @@
             <div class="special-item-card">
                 <div class="special-content">
                     <h3>Tuhti piirakka</h3>
-                    <ul class="special-ingredients">
+                    <ul class="special-ingredients main-list">
                         <li>Lihapiirakka</li>
                         <li>2 siivua Wurster makkaraa</li>
                         <li>Jauhelihapihvi</li>
                         <li>Muna</li>
                         <li>Juusto</li>
                     </ul>
-                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet:</div>
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                     </ul>
@@ -1426,12 +1440,12 @@
             <div class="special-item-card">
                 <div class="special-content">
                     <h3>Hotti piirakka <span class="chili-icon">🌶️</span></h3>
-                    <ul class="special-ingredients">
+                    <ul class="special-ingredients main-list">
                         <li>Chili lihapiirakka</li>
                         <li>Kebab lihaa</li>
                         <li>Pepper Jack juusto</li>
                     </ul>
-                    <div class="sisaltaa-mausteet">Sisältää mausteet;</div>
+                    <div class="sisaltaa-mausteet">Sisältää mausteet:</div>
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                         <li>Salaatti, chili majoneesi</li>
@@ -1444,32 +1458,45 @@
 
     <section id="lunch-deals">
         <div class="lunch-box-content">
-            <h2 class="lunch-title">LOUNASTARJOUKSIA</h2>
+            <h2 class="lunch-title">Lounaslistat</h2>
             <div class="lunch-items">
                 <div class="lunch-item">
-                    <div class="item-name-box"> <span class="item-name">Lihapullamakkaraperunat</span> <span
-                            class="item-detail">(Norm.koko)</span> </div> <span class="item-price">6,20€</span>
+                    <div class="item-name-box">
+                        <span class="item-name">Lihapullamakkaraperunat</span>
+                        <span class="item-detail">(Norm.koko)</span>
+                    </div>
+                    <span class="item-price">6,20€</span>
                 </div>
                 <div class="lunch-item">
-                    <div class="item-name-box"> <span class="item-name">Makkaraperunat</span> </div> <span
-                        class="item-price">5,00€</span>
+                    <div class="item-name-box">
+                        <span class="item-name">Makkaraperunat</span>
+                    </div>
+                    <span class="item-price">5,00€</span>
                 </div>
                 <div class="lunch-item">
-                    <div class="item-name-box"> <span class="item-name">Kerroshampurilainen</span> </div> <span
-                        class="item-price">4,70€</span>
+                    <div class="item-name-box">
+                        <span class="item-name">Kerroshampurilainen</span>
+                    </div>
+                    <span class="item-price">4,70€</span>
                 </div>
                 <div class="lunch-item">
-                    <div class="item-name-box"> <span class="item-name">Piirakka pihvillä</span> <span
-                            class="item-detail">+ muna + 2 nakkia</span> </div> <span class="item-price">6,20€</span>
+                    <div class="item-name-box">
+                        <span class="item-name">Piirakka pihvillä</span>
+                        <span class="item-detail">+ muna + 2 nakkia</span>
+                    </div>
+                    <span class="item-price">6,20€</span>
                 </div>
                 <div class="lunch-item">
-                    <div class="item-name-box"> <span class="item-name">Kanasalaatti</span> </div> <span
-                        class="item-price">6,00€</span>
+                    <div class="item-name-box">
+                        <span class="item-name">Kanasalaatti</span>
+                    </div>
+                    <span class="item-price">6,00€</span>
                 </div>
             </div>
             <p class="lunch-special-note">- Lounastajille jälkkärikahvit!</p>
         </div>
     </section>
+
     <section id="about">
         <h2>Meistä</h2>
         <div class="about-content">
@@ -1488,8 +1515,10 @@
                     huulilla</p>
             </div>
             <div class="about-image-stack">
-                <div class="about-image"> <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat 1"> </div>
-                <div class="about-image"> <img src="./img/sisa.jpg" alt="Grilli KIPSA Ravintolan sisätilat 2"> </div>
+                <div class="about-image" id="about-img-1"> <img src="./img/placeholder.jpg"
+                        alt="Grilli KIPSA Ravintolan sisätilat 1"> </div>
+                <div class="about-image" id="about-img-2"> <img src="./img/sisa.jpg"
+                        alt="Grilli KIPSA Ravintolan sisätilat 2"> </div>
             </div>
         </div>
     </section>
@@ -1498,17 +1527,32 @@
         <h2>Yhteystiedot</h2>
         <div class="footer-content-wrapper">
             <div class="footer-column footer-left">
-                <h3>Aukioloajat</h3>
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20"
+                        fill="currentColor">
+                        <path
+                            d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
+                    </svg>
+                    Aukioloajat
+                </h3>
                 <div class="opening-hours">
                     <p data-day="1">Ma: 10:30 – 22:00</p>
                     <p data-day="2">Ti: 10.30 – 22:00</p>
                     <p data-day="3">Ke: 10.30 – 22:00</p>
                     <p data-day="4">To: 10.30 – 22:00</p>
                     <p data-day="5">Pe: 10.30 – 04:00</p>
-                    <p data-day="6">La: 12:00 – 04:00</p>
+                    <p data-day="6">La: 10.30 – 04:00</p>
                     <p data-day="0">Su: 13:00 – 22:00</p>
                 </div>
-                <h3 style="margin-top: 2rem;">Yhteystiedot</h3>
+
+                <h3 style="margin-top: 2rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20"
+                        fill="currentColor">
+                        <path
+                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 256h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                    </svg>
+                    Yhteystiedot
+                </h3>
                 <p>05 3121866</p>
                 <p>info@grillikipsa.com</p>
                 <div class="contact-social-icon">
@@ -1522,7 +1566,14 @@
                 </div>
             </div>
             <div class="footer-column footer-right">
-                <h3>Sijainti</h3>
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20" height="20"
+                        fill="currentColor">
+                        <path
+                            d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                    </svg>
+                    Sijainti
+                </h3>
                 <p>Kouvolankatu 17, 45100 Kouvola</p>
                 <div class="map-container">
                     <iframe
@@ -1597,7 +1648,7 @@
                         setTimeout(() => {
                             isNavScrolling = false;
                             lastScrollTop = window.pageYOffset;
-                        }, 100); // 100ms buffer
+                        }, 100);
                     }
                 }
                 requestAnimationFrame(animationStep);
