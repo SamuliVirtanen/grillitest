@@ -4,12 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grilli KIPSA</title>
+
+    <title>Grilli Kipsa | Perinteinen Grillikioski Kouvola</title>
+    <meta name="description"
+        content="Grilli-Kipsa – tai kuten nuoret sanovat, “Anttilan Mäkki” – on vuonna 1979 perustettu perinteikäs grillikioski, joka on palvellut nälkäisiä asiakkaita jo useiden sukupolvien ajan.">
+
+    <meta property="og:title" content="Grilli Kipsa | Perinteinen Grillikioski Kouvola">
+    <meta property="og:description"
+        content="Grilli-Kipsa – tai kuten nuoret sanovat, “Anttilan Mäkki” – on vuonna 1979 perustettu perinteikäs grillikioski.">
+    <meta property="og:image" content="./img/Kipsa.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fi_FI">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Grilli Kipsa",
+      "image": "./img/Kipsa.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Kouvolankatu 17",
+        "addressLocality": "Kouvola",
+        "postalCode": "45100",
+        "addressCountry": "FI"
+      },
+      "telephone": "05 3121866",
+      "email": "kouvolan.grillikipsa@gmail.com",
+      "servesCuisine": "Grilliruoka",
+      "priceRange": "€",
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "10:30", "closes": "22:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "10:30", "closes": "22:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "10:30", "closes": "22:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "10:30", "closes": "22:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:30", "closes": "04:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:30", "closes": "04:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "13:00", "closes": "22:00" }
+      ]
+    }
+    </script>
+
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
     <style>
         /* Import Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
         :root {
             --primary-red: #cc0000;
@@ -37,8 +76,6 @@
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            /* --- MODIFIED: Removed padding-top --- */
-            /* padding-top: 100px; */
             box-sizing: border-box;
             line-height: 1.6;
             color: var(--text-color);
@@ -46,18 +83,17 @@
             overflow-y: auto;
         }
 
-        /* --- NEW: Top Bar Styling --- */
+        /* Top Bar Styling */
         .top-bar {
             background-color: var(--white);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 2rem;
-            /* Increased height */
-            /* border-bottom: 1px solid var(--menu-border); */
+            padding: 0.8rem 2rem;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             position: relative;
             z-index: 900;
+            border-bottom: 3px solid var(--secondary-black);
         }
 
         .top-bar-left,
@@ -69,66 +105,63 @@
 
         .top-bar-center {
             flex: 1.5;
-            /* Give center more space */
             text-align: center;
         }
 
         .top-bar-center img {
             height: 75px;
-            /* --- MODIFIED --- */
             width: auto;
             max-width: 100%;
         }
 
         .top-bar-left {
             justify-content: flex-end;
-            /* Push towards center */
             text-align: right;
             font-size: 0.9em;
             font-weight: 600;
             color: var(--secondary-black);
             padding-right: 2rem;
-            /* Add space next to logo */
         }
 
         .top-bar-hours strong {
             color: var(--text-color);
             display: block;
-            /* Make it stack */
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
         }
 
         .top-bar-hours span {
             color: var(--primary-red-readable);
-            font-size: 1.1em;
+            font-size: 1.2em;
+            font-weight: 700;
+            background: #ffebeb;
+            padding: 2px 8px;
+            border-radius: 4px;
         }
 
         .top-bar-right {
             flex: 1;
-            /* Balance the left side */
         }
 
-        /* --- END NEW --- */
-
-
-        /* --- MODIFIED: Header (Nav) Styling --- */
+        /* Header Styling */
         header {
-            background-color: var(--secondary-black);
+            background-color: rgba(34, 34, 34, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: var(--white);
             height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1rem 1.5rem;
-            /* Increased height */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
             width: 100%;
             box-sizing: border-box;
+            border-bottom: 2px solid var(--primary-red);
         }
-
-        /* END Header Styling */
 
         nav ul {
             list-style: none;
@@ -145,119 +178,131 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1em;
-            transition: color 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            padding: 0.8rem 0.5rem;
-            /* Increased clickable area */
+            padding: 0.5rem 1rem;
+            text-transform: uppercase;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 0.5px;
+            border-radius: 20px;
         }
 
         nav a:hover,
         nav a.active-nav-link {
-            color: var(--primary-red);
+            color: var(--white);
+            background-color: var(--primary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(204, 0, 0, 0.4);
         }
 
         nav a.active-nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-red);
+            display: none;
         }
 
+        /* --- HERO SECTION --- */
         .hero {
             background-image:
-                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
                 url('./img/Kipsa.jpg');
-            background-size: auto, cover;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed;
             color: var(--white);
             text-align: center;
-            padding: 4rem 2rem;
-            min-height: 65vh;
+            padding: 6rem 2rem 8rem 2rem;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            border-bottom: 4px solid var(--primary-red-readable);
-        }
-
-        .hero .hero-logo-image {
-            display: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            position: relative;
+            z-index: 10;
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+            margin-bottom: -2rem;
         }
 
         .hero h1 {
-            display: none;
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5em;
+            max-width: 900px;
+            margin: 1rem auto 0;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .hero p {
-            font-family: 'Lora', serif;
-            font-size: 1.8em;
-            /* --- MODIFIED --- */
-            max-width: 800px;
-            margin: 1rem auto 0;
-            font-weight: 400;
-            letter-spacing: 1px;
-            font-style: italic;
+            display: none;
         }
 
+        /* General Section Styling */
         section {
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
             max-width: 1200px;
-            margin: 0 auto 3rem auto;
+            margin: 0 auto 4rem auto;
             background-color: var(--white);
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            /* Added Border and Stronger Shadow for distinction */
+            border-top: 5px solid var(--primary-red);
+            border-left: 1px solid #eee;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             display: block;
             overflow: visible;
+            position: relative;
         }
 
         section:nth-of-type(even) {
             background-color: var(--off-white);
+            border: 1px solid #e0e0e0;
+            border-top: 5px solid var(--primary-red);
         }
 
         #menu {
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         h2 {
-            font-family: 'Lora', serif;
+            font-family: 'Oswald', sans-serif;
             color: var(--secondary-black);
             font-size: 3em;
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             margin-top: 0;
             position: relative;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         h2::after {
             content: '';
             position: absolute;
             left: 50%;
-            bottom: -10px;
+            bottom: -15px;
             transform: translateX(-50%);
             width: 80px;
-            height: 3px;
+            height: 4px;
             background-color: var(--secondary-black);
         }
 
-        /* Menu Section Styling */
-        #menu {
-            background-color: var(--menu-bg);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-            border: 1px solid var(--menu-border);
-        }
-
+        /* --- Specific Header Styles --- */
         #menu h2 {
             color: var(--secondary-black);
         }
 
         #menu h2::after {
             background-color: var(--secondary-black);
+        }
+
+        /* Menu Section Styling */
+        #menu {
+            background-color: var(--white);
         }
 
         .menu-container {
@@ -272,30 +317,34 @@
 
         .menu-column {
             flex: 1;
-            min-width: 280px;
-            max-width: 350px;
+            min-width: 300px;
+            max-width: 380px;
             padding: 0 1.5rem;
             box-sizing: border-box;
             border-right: none;
         }
 
         .menu-category {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            padding: 0;
+            border-radius: 0;
         }
 
         .menu-category h3 {
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
-            color: var(--primary-red-readable);
+            color: var(--primary-red);
             font-size: 1.6em;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             text-transform: uppercase;
-            border-bottom: 2px solid var(--primary-red-readable);
+            border-bottom: 2px solid #eee;
+            border-left: 5px solid var(--primary-red);
+            padding-left: 1rem;
             padding-bottom: 0.5rem;
             letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            gap: 0;
+            background: none;
         }
 
         .menu-category h3 svg {
@@ -308,18 +357,31 @@
             color: var(--dark-grey);
             text-transform: none;
             vertical-align: middle;
+            margin-left: 10px;
+            font-family: 'Montserrat', sans-serif;
         }
 
+        /* --- SIMPLE MENU ITEMS --- */
         .menu-item {
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            margin-bottom: 0.8rem;
-            padding-bottom: 0.5rem;
-            font-size: 0.95em;
+            /* Removed bottom margin */
+            padding: 0.5rem 0;
+            font-size: 1em;
             position: relative;
-            border-bottom: 1px solid var(--menu-border);
-            transition: background-color 0.2s ease;
+            border-bottom: 1px dotted #ccc;
+            border-left: none;
+            transition: none;
+            border-radius: 0;
+            background-color: transparent;
+        }
+
+        .menu-item:hover {
+            background-color: transparent;
+            box-shadow: none;
+            padding-left: 0;
+            border-left: none;
         }
 
         .menu-item:last-child {
@@ -331,7 +393,7 @@
             justify-content: space-between;
             align-items: baseline;
             width: 100%;
-            margin-bottom: 0.3rem;
+            /* Removed bottom margin */
         }
 
         .item-name {
@@ -339,171 +401,172 @@
             font-weight: 600;
         }
 
-        .menu-item .item-chili {
-            color: var(--text-color);
-            font-weight: 600;
-        }
-
         .item-price {
             font-weight: 700;
-            color: var(--primary-red-readable);
+            color: var(--primary-red);
             white-space: nowrap;
             margin-left: 1rem;
+            font-size: 1.1em;
         }
 
+        /* Updated Size Options - No Background */
         .size-options {
-            margin-left: 1rem;
+            margin-left: 0.5rem;
             font-size: 0.9em;
+            background: transparent;
+            /* Removed Background */
+            padding: 0.2rem 0;
+            border-radius: 0;
         }
 
         .size-options span {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .size-options span:last-child {
+            border-bottom: none;
         }
 
         .size-options .size-name {
             color: var(--dark-grey);
-            font-style: italic;
+            font-weight: 500;
         }
 
         .size-options .size-price {
-            font-weight: 600;
-            color: var(--primary-red-readable);
+            font-weight: 700;
+            color: var(--primary-red);
         }
 
-        /* Lunch Deals Section Styling */
+        /* Lunch Deals Section */
         #lunch-deals {
-            max-width: 600px;
-            margin: 3rem auto;
+            max-width: 800px;
+            margin: 4rem auto;
             padding: 0;
-            border: 4px solid var(--primary-red);
+            border: 2px solid var(--secondary-black);
+            border-top: 5px solid var(--primary-red);
+            /* Consistent top border */
             background-color: var(--white);
             overflow: hidden;
             text-align: left;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: none;
+        }
+
+        #lunch-deals:hover {
+            transform: none;
         }
 
         .lunch-title {
             font-family: 'Oswald', sans-serif;
-            color: var(--secondary-black);
+            color: var(--white);
             font-size: 2.2em;
             font-weight: 700;
             text-align: center;
-            text-transform: none;
+            text-transform: uppercase;
             padding: 1.5rem;
-            background-color: #f0f0f0;
-            border-bottom: 1px solid var(--menu-border);
+            background-color: var(--secondary-black);
+            border-bottom: none;
             margin: 0;
             position: relative;
-        }
-
-        .lunch-title::after {
-            display: none;
+            letter-spacing: 2px;
+            text-shadow: none;
         }
 
         .lunch-items {
-            padding: 1.5rem 2rem;
+            padding: 2rem;
             display: block;
+            background: var(--white);
         }
 
         .lunch-item {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: center;
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px dotted var(--dark-grey);
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
             font-size: 1.1em;
-            line-height: 1.2;
+            line-height: 1.4;
         }
 
-        .lunch-items .lunch-item:last-of-type {
+        .lunch-item:last-child {
             border-bottom: none;
-        }
-
-        .item-name-box {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.3;
-        }
-
-        .lunch-item .item-name {
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        .lunch-item .item-detail {
-            font-size: 0.8em;
-            font-weight: 400;
-            color: var(--dark-grey);
-            margin-left: 0;
-            white-space: nowrap;
+            margin-bottom: 0;
         }
 
         .lunch-item .item-price {
-            font-weight: 700;
-            color: var(--secondary-black);
+            background: transparent;
+            color: var(--primary-red);
+            padding: 0;
+            border-radius: 0;
+            transform: none;
             font-size: 1.2em;
-            margin-left: 1rem;
-            white-space: nowrap;
         }
 
         .lunch-special-note {
-            font-size: 0.95em;
-            color: var(--primary-red-readable);
-            font-weight: 600;
-            margin-top: 1.5rem;
-            padding: 0 2rem 1rem;
+            font-size: 1.1em;
+            color: var(--primary-red);
+            font-weight: 700;
+            margin: 0;
+            padding: 1rem;
             text-align: center;
             display: block;
+            background: var(--white);
+            border-top: 2px solid #eee;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Special Deal Section (Annokset) */
+        /* --- SPECIAL DEALS (ANNOKSET) --- */
         #specials {
             background-color: var(--off-white);
-            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            /* Re-added generic section styling */
+            padding-top: 4rem;
         }
 
         #specials h2 {
-            color: var(--secondary-black);
-            padding-bottom: 1rem;
-        }
-
-        #specials h2::after {
-            background-color: var(--secondary-black);
+            font-size: 3em;
+            text-shadow: none;
         }
 
         .specials-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2rem;
+            gap: 2.5rem;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding-bottom: 0;
-            padding-top: 2.5rem;
+            padding-top: 2rem;
         }
 
         .special-item-card {
             flex: 1;
-            min-width: 280px;
-            max-width: 320px;
-            border: 4px solid var(--special-card-border);
-            background-color: var(--special-card-bg);
-            overflow: visible;
+            min-width: 300px;
+            max-width: 350px;
+            border: 1px solid #e0e0e0;
+            border-top: 5px solid var(--primary-red);
+            background-color: var(--white);
             text-align: center;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             position: relative;
-            margin-top: 35px;
+            margin-top: 40px;
             box-sizing: border-box;
+            transform-style: flat;
+        }
+
+        .special-item-card:hover {
+            transform: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
         .special-card-logo {
@@ -511,36 +574,41 @@
             top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            height: 70px;
-            width: auto;
+            height: 80px;
+            width: 80px;
             z-index: 2;
+            background: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .special-card-logo img {
-            height: 100%;
+            height: 50px;
             width: auto;
         }
 
         .special-content {
-            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            padding: 3rem 1.5rem 2rem 1.5rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
             text-align: left;
-            padding-top: 45px;
-            /* Space for the logo */
         }
 
         .special-content h3 {
             font-family: 'Oswald', sans-serif;
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: 700;
-            color: var(--special-title-color);
+            color: var(--secondary-black);
             line-height: 1.2;
-            margin: 0 0 1rem 0;
+            margin: 0 0 1.5rem 0;
             text-align: center;
-            border-bottom: 2px solid var(--secondary-black);
-            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
             text-transform: uppercase;
         }
 
@@ -548,68 +616,64 @@
             color: var(--primary-red);
             margin-left: 5px;
             display: inline-block;
-            font-family: 'Montserrat', sans-serif;
+            animation: none;
         }
 
         .sisaltaa-mausteet {
-            font-size: 0.9em;
-            font-style: italic;
-            color: var(--dark-grey);
+            font-size: 0.85em;
+            font-weight: 700;
+            color: var(--primary-red-readable);
             margin-top: auto;
             padding-top: 1rem;
             margin-bottom: 0.5rem;
-            text-align: left;
-            font-weight: 400;
-            padding-left: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .special-ingredients {
             list-style: none;
-            padding: 0 0 0 1.5rem;
+            padding: 0;
             margin: 0 0 1rem 0;
-            text-align: left;
+            text-align: center;
             font-size: 1em;
-            font-weight: 400;
-            color: var(--special-list-color);
-            display: inline-block;
-            flex-grow: 0;
+            color: var(--dark-grey);
         }
 
         .special-ingredients.main-list {
             flex-grow: 1;
             font-weight: 600;
-            font-size: 1.05em;
-        }
-
-        .sisaltaa-mausteet+.special-ingredients {
-            margin-top: 0;
-            flex-grow: 0;
-            font-size: 0.9em;
-            font-weight: 400;
-            color: var(--dark-grey);
+            font-size: 1.1em;
+            color: var(--secondary-black);
+            line-height: 1.6;
         }
 
         .special-ingredients li {
-            position: relative;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
         }
 
         .special-ingredients li::before {
-            content: '-';
-            position: absolute;
-            left: -1.5rem;
-            color: var(--special-list-color);
-            font-weight: 700;
+            content: none;
         }
 
         .special-price {
             font-family: 'Oswald', sans-serif;
-            font-size: 2.8em;
+            font-size: 2.5em;
             font-weight: 700;
-            color: var(--special-price-color);
+            color: var(--white);
             line-height: 1;
             margin-top: 1.5rem;
             text-align: center;
+            background: var(--primary-red);
+            padding: 0.5rem;
+            border-radius: 4px;
+            transform: none;
+            box-shadow: none;
+            transition: none;
+        }
+
+        .special-item-card:hover .special-price {
+            transform: none;
         }
 
         /* About Section */
@@ -617,21 +681,13 @@
             background-color: var(--white);
         }
 
-        #about h2 {
-            color: var(--secondary-black);
-        }
-
-        #about h2::after {
-            background-color: var(--secondary-black);
-        }
-
         .about-content {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 3rem;
             flex-wrap: wrap;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             justify-content: center;
             margin: 0 auto;
         }
@@ -639,66 +695,64 @@
         .about-text {
             flex: 1;
             min-width: 300px;
-            max-width: 500px;
+            max-width: 550px;
         }
 
         .about-text p {
-            font-size: 1.05em;
+            font-size: 1.1em;
             line-height: 1.7;
             margin-bottom: 1.5rem;
+            color: #444;
         }
 
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-
+        /* Fixed About Image Layout */
         .about-image-stack {
             flex: 1;
             min-width: 320px;
             max-width: 450px;
             position: relative;
-            min-height: 420px;
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
             margin: 1rem;
+            perspective: none;
         }
 
         .about-image {
-            position: absolute;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s, top 0.5s ease-out, left 0.5s ease-out, right 0.5s ease-out;
-            border: 5px solid var(--white);
+            border: none;
+            transition: none;
+            width: 100% !important;
+            height: 250px !important;
+        }
+
+        /* Height fix for 2nd image */
+        #about-img-2 {
+            height: 280px !important;
         }
 
         .about-image img {
-            max-width: 100%;
+            width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 8px;
             display: block;
         }
 
-        #about-img-1 {
-            width: 70%;
-            height: 280px;
-            top: -60px;
-            left: 0;
-            z-index: 1;
-        }
-
+        #about-img-1,
         #about-img-2 {
-            width: 95%;
-            height: 240px;
-            top: 260px;
-            right: 0;
+            top: auto;
             left: auto;
-            z-index: 2;
+            right: auto;
+            z-index: 1;
+            transform: none;
         }
 
-        .about-image.visible {
-            opacity: 1;
-            transform: scale(1);
+        .about-image-stack:hover #about-img-1,
+        .about-image-stack:hover #about-img-2 {
+            transform: none;
         }
 
         /* --- Scroll Reveal Styling --- */
@@ -708,15 +762,8 @@
         .about-content,
         .footer-content-wrapper {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .special-image,
-        .about-image {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.7s ease-out 0.2s, transform 0.7s ease-out 0.2s;
         }
 
         .menu-container.visible,
@@ -728,28 +775,28 @@
             transform: translateY(0);
         }
 
-        .special-image.visible,
-        .about-image.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
         /* --- END Scroll Reveal Styling --- */
 
         /* --- Footer Styling --- */
         footer {
             background-color: var(--secondary-black);
             color: var(--light-grey);
-            padding: 3rem 2rem 2rem 2rem;
+            padding: 4rem 2rem 2rem 2rem;
             position: relative;
             z-index: 500;
-            margin-top: 3rem;
+            margin-top: 4rem;
+            clip-path: none;
+            margin-bottom: 0;
+            background-image: none;
+            border-top: 5px solid var(--primary-red);
         }
 
         footer h2 {
+            font-family: 'Oswald', sans-serif;
             color: var(--white);
-            font-size: 2em;
-            margin-bottom: 2rem;
+            font-size: 2.5em;
+            margin-bottom: 3rem;
+            text-shadow: none;
         }
 
         footer h2::after {
@@ -763,17 +810,17 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 0;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--dark-grey);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #444;
             padding-bottom: 0.5rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 10px;
         }
 
         footer h3 svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             fill: var(--white);
         }
 
@@ -781,93 +828,114 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2rem 3rem;
-            max-width: 1100px;
-            margin: 0 auto 2rem auto;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem auto;
             text-align: left;
         }
 
         .footer-column {
             flex: 1;
             min-width: 300px;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            backdrop-filter: none;
         }
 
         .footer-column p {
             margin-bottom: 0.8rem;
             font-size: 1em;
-            line-height: 1.4;
-            color: var(--light-grey);
+            color: #ccc;
         }
 
         .footer-column .opening-hours p {
-            margin-bottom: 0.3rem;
-            line-height: 1.3;
-            color: var(--light-grey);
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted #444;
+            padding-bottom: 5px;
         }
 
         .footer-column a {
             color: var(--white);
             text-decoration: none;
-            transition: text-decoration 0.3s ease;
+            transition: color 0.3s ease;
+            font-weight: 400;
         }
 
         .footer-column a:hover {
+            color: var(--primary-red);
             text-decoration: underline;
         }
 
         .footer-column .contact-social-icon {
-            text-align: left;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-column .contact-social-icon a {
+            display: inline-block;
+            background: #333;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .footer-column .contact-social-icon a:hover {
+            background: var(--primary-red);
         }
 
         .footer-column .contact-social-icon svg {
-            width: 35px;
-            height: 35px;
+            width: 20px;
+            height: 20px;
             fill: var(--white);
-            /* White icon */
+            display: block;
         }
 
         .footer-column .map-container {
             margin-top: 1rem;
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden;
+            border: 1px solid #444;
         }
 
         .footer-column .map-container iframe {
             display: block;
             width: 100%;
-            max-width: none;
             height: 250px;
             border: 0;
-            margin-left: 0;
-            margin-right: 0;
         }
 
         .copyright {
             text-align: center;
             font-size: 0.9em;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--dark-grey);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #777;
         }
-
-        /* --- END Footer Styling --- */
-
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
-            #menu .menu-column:nth-child(2n-1) {
-                border-right: none;
+            header {
+                width: calc(100% - 2rem);
             }
 
-            .menu-column {
-                border-right: none;
+            .hero {
+                background-attachment: scroll;
+                /* Disable parallax on mobile */
+                clip-path: none;
+                /* Simplify shape on small screens if needed, but keeping for now */
+                padding-bottom: 4rem;
             }
         }
 
         @media (max-width: 767px) {
-            body {
-                padding-top: 0;
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            h2 {
+                font-size: 2.5em;
             }
 
             .top-bar {
@@ -898,242 +966,65 @@
                 display: none;
             }
 
-            .top-bar-hours {
-                align-items: center;
-            }
-
             header {
                 position: sticky;
                 top: 0;
-                width: 100%;
-                max-width: 100%;
-                left: 0;
-                transform: none;
-                border-radius: 0;
-                top: 0 !important;
-                left: 0 !important;
-                transform: none !important;
                 width: 100% !important;
-                max-width: 100% !important;
+                left: 0 !important;
                 border-radius: 0 !important;
-                background-color: var(--secondary-black) !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-            }
-
-            header.at-top {
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            }
-
-            .hero {
-                margin-top: 0;
-            }
-
-            nav ul {
-                gap: 0.5rem 1rem;
-            }
-
-            .hero .hero-logo-image {
-                width: 90%;
-                max-width: 400px;
-                margin-bottom: 0.5rem;
-            }
-
-            .hero p {
-                font-size: 1.4em;
-                letter-spacing: 0.5px;
-            }
-
-            section {
-                padding: 2rem 1.5rem;
-            }
-
-            h2 {
-                font-size: 2.2em;
-            }
-
-            #menu {
-                flex-direction: column;
-                align-items: stretch;
             }
 
             .menu-container {
                 flex-direction: column;
-                align-items: center;
             }
 
             .menu-column {
-                min-width: unset;
-                width: 100%;
-                max-width: 450px;
-                border-right: none;
-                border-bottom: 1px solid var(--menu-border);
-                padding: 1rem;
+                display: contents;
             }
 
-            .menu-column:last-child {
-                border-bottom: none;
+            .menu-category {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto 2rem auto;
             }
 
             .about-content {
                 flex-direction: column;
             }
 
-            .about-text {
-                max-width: 90%;
-            }
-
             .about-image-stack {
-                min-height: auto;
-                width: 90%;
-                margin: 1rem 0 0 0;
+                width: 100%;
+                margin: 2rem 0;
+                position: static;
                 display: flex;
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
                 align-items: center;
-                position: static;
             }
 
             .about-image {
                 position: static;
-                transform: scale(0.95);
-                opacity: 0;
-                width: 100%;
+                width: 100% !important;
+                margin-bottom: 0;
+                height: 220px !important;
             }
 
             #about-img-1 {
-                width: 75%;
-                height: 220px;
+                height: 220px !important;
             }
 
             #about-img-2 {
+                height: 200px !important;
                 width: 100%;
-                height: 255px;
-                top: auto;
-                right: auto;
             }
 
-            .about-image.visible {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            .lunch-title {
-                font-size: 1.8em;
-                padding: 1rem;
-            }
-
-            .lunch-items {
-                padding: 1rem 1.5rem;
-            }
-
-            .lunch-item {
-                font-size: 1em;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .item-name-box {
-                margin-bottom: 0.5rem;
-            }
-
-            .lunch-item .item-price {
-                font-size: 1.1em;
-                margin-left: 0;
-            }
-
-            .lunch-special-note {
-                font-size: 0.9em;
-                padding: 1rem 1.5rem 1.5rem 1.5rem;
-            }
-
-            .specials-container {
-                gap: 1.5rem;
-            }
-
-            .special-item-card {
-                max-width: 90%;
-                min-width: 280px;
-                padding-bottom: 1.5rem;
-            }
-
-            .special-content h3 {
-                font-size: 1.8em;
-            }
-
-            .special-ingredients {
-                font-size: 0.95em;
-            }
-
-            .special-price {
-                font-size: 2.5em;
-                bottom: 1.5rem;
-            }
-
-            .sisaltaa-mausteet {
-                font-size: 0.9em;
-            }
-
-            /* Footer responsive */
             .footer-content-wrapper {
                 flex-direction: column;
-                gap: 2rem;
-            }
-
-            .footer-column {
-                min-width: 100%;
             }
 
             footer {
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding-top: 0;
-            }
-
-            .hero {
-                min-height: 50vh;
-            }
-
-            .hero .hero-logo-image {
-                width: 95%;
-                max-width: 300px;
-            }
-
-            .hero p {
-                font-size: 1.1em;
-                letter-spacing: 0;
-            }
-
-            nav a {
-                font-size: 1em;
-            }
-
-            h2 {
-                font-size: 1.8em;
-            }
-
-            .special-content h3 {
-                font-size: 1.6em;
-            }
-
-            .special-ingredients {
-                font-size: 0.9em;
-            }
-
-            .special-price {
-                font-size: 2.2em;
-            }
-
-            .map-container iframe {
-                max-width: 100%;
-            }
-
-            .menu-column {
-                width: 100%;
+                padding-top: 3rem;
+                clip-path: none;
             }
         }
     </style>
@@ -1159,7 +1050,7 @@
             <ul>
                 <li><a href="#menu">Hinnasto</a></li>
                 <li><a href="#specials">Annokset</a></li>
-                <li><a href="#lunch-deals">Lounaslistat</a></li>
+                <li><a href="#lunch-deals">LOUNASTARJOUKSIA</a></li>
                 <li><a href="#about">Meistä</a></li>
                 <li><a href="#contact">Yhteystiedot</a></li>
             </ul>
@@ -1167,14 +1058,14 @@
     </header>
 
     <div class="hero">
-        <p>Maukkaimmat perinteiset grilliherkut!</p>
+        <h1>Maukkaimmat perinteiset grilliherkut!</h1>
     </div>
 
     <section id="menu">
         <h2>Hinnasto</h2>
         <div class="menu-container">
             <div class="menu-column">
-                <div class="menu-category">
+                <div class="menu-category cat-lihapiirakka">
                     <h3>Lihapiirakka</h3>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Lihapiirakka</span><span
@@ -1233,7 +1124,7 @@
                                 class="item-price">7,30€</span></div>
                     </div>
                 </div>
-                <div class="menu-category">
+                <div class="menu-category cat-pitaleivat">
                     <h3>Pitaleivät</h3>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Tonnikalapita</span><span
@@ -1252,7 +1143,7 @@
                                 class="item-price">8,90€</span></div>
                     </div>
                 </div>
-                <div class="menu-category">
+                <div class="menu-category cat-muut">
                     <h3>Muita herkkuja</h3>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Porilainen</span><span
@@ -1297,7 +1188,7 @@
                 </div>
             </div>
             <div class="menu-column">
-                <div class="menu-category">
+                <div class="menu-category cat-ranskalaiset">
                     <h3>Ranskalaisannokset</h3>
                     <div class="menu-item">
                         <div class="item-main"> <span class="item-name">Ranskalaiset</span> </div>
@@ -1325,11 +1216,11 @@
                                 class="item-price">7,30€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"><span class="item-name">Kananugetit (nugeteilla)</span><span
+                        <div class="item-main"><span class="item-name">Kanaperunat (nugeteilla)</span><span
                                 class="item-price">7,50€</span></div>
                     </div>
                     <div class="menu-item">
-                        <div class="item-main"><span class="item-name">Kananugetit (fileillä)</span><span
+                        <div class="item-main"><span class="item-name">Kanaperunat (fileillä)</span><span
                                 class="item-price">9,90€</span></div>
                     </div>
                     <div class="menu-item">
@@ -1349,7 +1240,7 @@
                                 <span class="size-price">9,80€</span></span> </div>
                     </div>
                 </div>
-                <div class="menu-category">
+                <div class="menu-category cat-burgerit">
                     <h3>Burgerit <span class="h3-subtext">(kokolihapihvillä)</span></h3>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Burgeri</span><span
@@ -1380,33 +1271,9 @@
                                 class="item-price">18,00€</span></div>
                     </div>
                 </div>
-                <div class="menu-category">
-                    <h3>Juomat</h3>
-                    <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Maito</span> </div>
-                        <div class="size-options"> <span><span class="size-name">0,2 l</span> <span
-                                    class="size-price">1,00€</span></span> <span><span class="size-name">0,5 l</span>
-                                <span class="size-price">1,40€</span></span> <span><span class="size-name">1,0 l</span>
-                                <span class="size-price">2,50€</span></span> </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-main"> <span class="item-name">Limsat</span> </div>
-                        <div class="size-options"> <span><span class="size-name">0,5 l</span> <span
-                                    class="size-price">3,50€</span></span> <span><span class="size-name">1,5 l</span>
-                                <span class="size-price">5,50€</span></span> </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-main"><span class="item-name">Grandi</span><span
-                                class="item-price">1,20€</span></div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-main"><span class="item-name">Tuoremehu</span><span
-                                class="item-price">4,50€</span></div>
-                    </div>
-                </div>
             </div>
             <div class="menu-column">
-                <div class="menu-category">
+                <div class="menu-category cat-hampurilaiset">
                     <h3>Hampurilaiset</h3>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Hampurilainen</span><span
@@ -1441,7 +1308,7 @@
                                 class="item-price">8,00€</span></div>
                     </div>
                 </div>
-                <div class="menu-category">
+                <div class="menu-category cat-salaatit">
                     <h3>Salaattiannokset</h3>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Tonnikala</span><span
@@ -1466,6 +1333,30 @@
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Kebab</span><span class="item-price">8,60€</span>
                         </div>
+                    </div>
+                </div>
+                <div class="menu-category cat-juomat">
+                    <h3>Juomat</h3>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Maito</span> </div>
+                        <div class="size-options"> <span><span class="size-name">0,2 l</span> <span
+                                    class="size-price">1,00€</span></span> <span><span class="size-name">0,5 l</span>
+                                <span class="size-price">1,40€</span></span> <span><span class="size-name">1,0 l</span>
+                                <span class="size-price">2,50€</span></span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"> <span class="item-name">Limsat</span> </div>
+                        <div class="size-options"> <span><span class="size-name">0,5 l</span> <span
+                                    class="size-price">3,50€</span></span> <span><span class="size-name">1,5 l</span>
+                                <span class="size-price">5,50€</span></span> </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Grandi</span><span
+                                class="item-price">1,20€</span></div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-main"><span class="item-name">Tuoremehu</span><span
+                                class="item-price">4,50€</span></div>
                     </div>
                 </div>
             </div>
@@ -1595,42 +1486,42 @@
 
     <section id="lunch-deals">
         <div class="lunch-box-content">
-            <h2 class="lunch-title">Lounaslistat</h2>
+            <h2 class="lunch-title">LOUNASTARJOUKSIA</h2>
             <div class="lunch-items">
                 <div class="lunch-item">
                     <div class="item-name-box">
-                        <span class="item-name">Lihapullamakkaraperunat</span>
-                        <span class="item-detail">(Norm.koko)</span>
+                        <span class="item-name">Kebab ranskalaiset</span>
+                        <span class="item-detail">(iso koko)</span>
                     </div>
-                    <span class="item-price">6,20€</span>
+                    <span class="item-price">9,00€</span>
                 </div>
                 <div class="lunch-item">
                     <div class="item-name-box">
                         <span class="item-name">Makkaraperunat</span>
                     </div>
-                    <span class="item-price">5,00€</span>
+                    <span class="item-price">7,00€</span>
                 </div>
                 <div class="lunch-item">
                     <div class="item-name-box">
-                        <span class="item-name">Kerroshampurilainen</span>
+                        <span class="item-name">Piirakka</span>
+                        <span class="item-detail">Pihvi+muna+juusto</span>
                     </div>
-                    <span class="item-price">4,70€</span>
+                    <span class="item-price">6,80€</span>
                 </div>
                 <div class="lunch-item">
                     <div class="item-name-box">
-                        <span class="item-name">Piirakka pihvillä</span>
-                        <span class="item-detail">+ muna + 2 nakkia</span>
+                        <span class="item-name">Kerroshamppari</span>
                     </div>
-                    <span class="item-price">6,20€</span>
+                    <span class="item-price">5,80€</span>
                 </div>
                 <div class="lunch-item">
                     <div class="item-name-box">
-                        <span class="item-name">Kanasalaatti</span>
+                        <span class="item-name">Tonnikalasalaatti</span>
                     </div>
-                    <span class="item-price">6,00€</span>
+                    <span class="item-price">7,50€</span>
                 </div>
             </div>
-            <p class="lunch-special-note">- Lounastajille jälkkärikahvit!</p>
+            <p class="lunch-special-note">Lounastajille jälkkärikahvit!</p>
         </div>
     </section>
 
@@ -1652,9 +1543,9 @@
                     huulilla</p>
             </div>
             <div class="about-image-stack">
-                <div class="about-image" id="about-img-1"> <img src="./img/placeholder.jpg"
+                <div class="about-image" id="about-img-1"> <img src="./img/Vanha_Kipsa.jpg"
                         alt="Grilli KIPSA Ravintolan sisätilat 1"> </div>
-                <div class="about-image" id="about-img-2"> <img src="./img/sisa.jpg"
+                <div class="about-image" id="about-img-2"> <img src="./img/Sisa_Kuva.jpg"
                         alt="Grilli KIPSA Ravintolan sisätilat 2"> </div>
             </div>
         </div>
@@ -1691,7 +1582,7 @@
                     Yhteystiedot
                 </h3>
                 <p>05 3121866</p>
-                <p>info@grillikipsa.com</p>
+                <p>kouvolan.grillikipsa@gmail.com</p>
                 <div class="contact-social-icon">
                     <a href="https://www.facebook.com/grillikipsa" target="_blank" rel="noopener noreferrer"
                         aria-label="Löydä meidät Facebookista">
@@ -1733,11 +1624,12 @@
             let lastScrollTop = 0;
             let isNavScrolling = false; // Flag to check if we are auto-scrolling
 
-            // --- MODIFIED: Header Transition on Scroll (Hiding logic removed) ---
+            // --- Header Transition & Hide/Show on Scroll ---
             function handleHeaderScroll() {
+                // --- MODIFIED: Removed hiding logic ---
                 let currentScrollTop = window.pageYOffset;
 
-                // Full-width vs. Floating state
+                // 1. Full-width vs. Floating state
                 if (currentScrollTop <= 20) {
                     header.classList.add('at-top');
                 } else {
