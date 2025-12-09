@@ -38,8 +38,8 @@
         { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "10:30", "closes": "22:00" },
         { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "10:30", "closes": "22:00" },
         { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "10:30", "closes": "22:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:30", "closes": "04:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:30", "closes": "04:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:30", "closes": "02:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:30", "closes": "02:00" },
         { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "13:00", "closes": "22:00" }
       ]
     }
@@ -48,7 +48,7 @@
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
     <style>
         /* Import Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap');
 
         :root {
             --primary-red: #cc0000;
@@ -305,6 +305,64 @@
             background-color: var(--white);
         }
 
+        /* --- New Styling for Menu Extras Note --- */
+        .menu-intro-note {
+            text-align: center;
+            max-width: 800px;
+            margin: -1.5rem auto 0.5rem auto;
+            background-color: #f9f9f9;
+            padding: 0.8rem 1rem 0.3rem 1rem;
+            border-radius: 4px;
+            line-height: 1.5;
+        }
+
+        .menu-intro-title {
+            font-weight: 700;
+            color: var(--secondary-black);
+            display: block;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            font-size: 1em;
+        }
+
+        .menu-intro-list {
+            font-weight: 500;
+            color: #333;
+            /* Slightly darker than grey, slightly lighter than black */
+            font-style: italic;
+        }
+
+        .category-note {
+            background-color: #fff;
+            padding: 0.8rem 0;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #ccc;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .note-header {
+            font-weight: 700;
+            color: var(--secondary-black);
+            margin-bottom: 0.2rem;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .note-body {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.4rem;
+            font-size: 0.9em;
+        }
+
+        .mayo-list {
+            font-size: 0.85em;
+            color: var(--dark-grey);
+            font-style: italic;
+        }
+
         .menu-container {
             display: flex;
             flex-wrap: wrap;
@@ -366,7 +424,6 @@
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            /* Removed bottom margin */
             padding: 0.5rem 0;
             font-size: 1em;
             position: relative;
@@ -393,7 +450,6 @@
             justify-content: space-between;
             align-items: baseline;
             width: 100%;
-            /* Removed bottom margin */
         }
 
         .item-name {
@@ -1014,7 +1070,7 @@
             }
 
             #about-img-2 {
-                height: 200px !important;
+                height: 280px !important;
                 width: 100%;
             }
 
@@ -1063,6 +1119,10 @@
 
     <section id="menu">
         <h2>Hinnasto</h2>
+        <div class="menu-intro-note">
+            <span class="menu-intro-title">Kaikkiin tuotteisiin kuuluu perusmausteina:</span>
+            <span class="menu-intro-list">sinappi, ketsuppi, kurkkusalaatti, sipuli</span>
+        </div>
         <div class="menu-container">
             <div class="menu-column">
                 <div class="menu-category cat-lihapiirakka">
@@ -1242,6 +1302,14 @@
                 </div>
                 <div class="menu-category cat-burgerit">
                     <h3>Burgerit <span class="h3-subtext">(kokolihapihvillä)</span></h3>
+                    <div class="category-note">
+                        <div class="note-header">Hintaan sisältyy:</div>
+                        <div class="note-body">Perusmausteen + tuoresalaatti, tomaatti sekä majoneesi:</div>
+                        <div class="mayo-list">
+                            Amerikan, Valkosipuli, Chili, Kevyt, Curry, Tulinen chilikastike, Ranskalainen
+                            salaattikastike, Mieto Kebabkastike
+                        </div>
+                    </div>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Burgeri</span><span
                                 class="item-price">4,70€</span></div>
@@ -1266,15 +1334,19 @@
                         <div class="item-main"><span class="item-name">Reissu</span><span
                                 class="item-price">6,80€</span></div>
                     </div>
-                    <div class="menu-item">
-                        <div class="item-main"><span class="item-name">Sekagrillilautanen</span><span
-                                class="item-price">18,00€</span></div>
-                    </div>
                 </div>
             </div>
             <div class="menu-column">
                 <div class="menu-category cat-hampurilaiset">
                     <h3>Hampurilaiset</h3>
+                    <div class="category-note">
+                        <div class="note-header">Hintaan sisältyy:</div>
+                        <div class="note-body">Perusmausteen + tuoresalaatti, tomaatti sekä majoneesi:</div>
+                        <div class="mayo-list">
+                            Amerikan, Valkosipuli, Chili, Kevyt, Curry, Tulinen chilikastike, Ranskalainen
+                            salaattikastike, Mieto Kebabkastike
+                        </div>
+                    </div>
                     <div class="menu-item">
                         <div class="item-main"><span class="item-name">Hampurilainen</span><span
                                 class="item-price">4,00€</span></div>
@@ -1459,7 +1531,7 @@
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                     </ul>
-                    <div class="special-price"> 8,80€ </div>
+                    <div class="special-price"> 8,90€ </div>
                 </div>
             </div>
             <div class="special-item-card">
@@ -1568,8 +1640,8 @@
                     <p data-day="2">Ti: 10.30 – 22:00</p>
                     <p data-day="3">Ke: 10.30 – 22:00</p>
                     <p data-day="4">To: 10.30 – 22:00</p>
-                    <p data-day="5">Pe: 10.30 – 04:00</p>
-                    <p data-day="6">La: 10.30 – 04:00</p>
+                    <p data-day="5">Pe: 10.30 – 02:00</p>
+                    <p data-day="6">La: 10.30 – 02:00</p>
                     <p data-day="0">Su: 13:00 – 22:00</p>
                 </div>
 
@@ -1765,8 +1837,8 @@
                     "10:30 – 22:00", // Ti (2)
                     "10:30 – 22:00", // Ke (3)
                     "10:30 – 22:00", // To (4)
-                    "10:30 – 04:00", // Pe (5)
-                    "10:30 – 04:00"  // La (6)
+                    "10:30 – 02:00", // Pe (5)
+                    "10:30 – 02:00"  // La (6)
                 ];
 
                 hoursSpan.textContent = hoursMap[today];
