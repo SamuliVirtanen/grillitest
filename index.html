@@ -1825,25 +1825,68 @@
                 revealObserver.observe(el);
             });
 
-            // --- Today's Opening Hours ---
-            function setOpeningHours() {
-                const hoursSpan = document.getElementById('today-hours');
-                if (!hoursSpan) return;
+            // --- Opening Hours Fetch ---
+            async function fetchOpeningHours() {
+                const todaySpan = document.getElementById('today-hours');
 
-                const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
-                const hoursMap = [
-                    "13:00 – 22:00", // Su (0)
-                    "10:30 – 22:00", // Ma (1)
-                    "10:30 – 22:00", // Ti (2)
-                    "10:30 – 22:00", // Ke (3)
-                    "10:30 – 22:00", // To (4)
-                    "10:30 – 02:00", // Pe (5)
-                    "10:30 – 02:00"  // La (6)
-                ];
+                try {
+                    const response = await fetch('https://raw.githubusercontent.com/SamuliVirtanen/opening-hours/refs/heads/main/hours.json');
+                    const data = await response.json();
+                    const days = data.days;
 
-                hoursSpan.textContent = hoursMap[today];
+                    // Map API array (0=Mon...6=Sun) to JS Date.getDay() (0=Sun, 1=Mon...)
+                    // API: 0:Ma, 1:Ti, 2:Ke, 3:To, 4:Pe, 5:La, 6:Su
+                    // JS: 1:Ma, 2:Ti, 3:Ke, 4:To, 5:Pe, 6:La, 0:Su
+                    const jsDayToApiIndex = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 0: 6 };
+                    const apiIndexToJsDay = { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0 };
+                    const abbreviations = ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]; // Indices match API array
+
+                    // 1. Update Today's Hours (Top Bar)
+                    const currentJsDay = new Date().getDay();
+                    const currentApiIndex = jsDayToApiIndex[currentJsDay];
+                    const todayData = days[currentApiIndex];
+
+                    if (todaySpan && todayData) {
+                        let text = "";
+                        if (todayData.isClosed) {
+                            text = "Suljettu";
+                        } else {
+                            text = `${todayData.open} – ${todayData.close}`;
+                        }
+                        if (todayData.exception) {
+                            text += ` (${todayData.exception})`;
+                        }
+                        todaySpan.textContent = text;
+                    }
+
+                    // 2. Update Footer Hours list
+                    days.forEach((dayData, index) => {
+                        const jsDay = apiIndexToJsDay[index];
+                        const abbr = abbreviations[index];
+                        const pTag = document.querySelector(`.opening-hours p[data-day="${jsDay}"]`);
+
+                        if (pTag) {
+                            let text = `${abbr}: `;
+                            if (dayData.isClosed) {
+                                text += "Suljettu";
+                            } else {
+                                text += `${dayData.open} – ${dayData.close}`;
+                            }
+                            if (dayData.exception) {
+                                text += ` (${dayData.exception})`;
+                            }
+                            pTag.textContent = text;
+                        }
+                    });
+
+                } catch (error) {
+                    console.error("Error fetching opening hours:", error);
+                    // Fallback
+                    if (todaySpan) todaySpan.textContent = "Ei saatavilla";
+                }
             }
-            setOpeningHours();
+
+            fetchOpeningHours();
         });
     </script>
 </body>
