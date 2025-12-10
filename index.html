@@ -16,6 +16,22 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fi_FI">
 
+    <!-- Preload the Hero Background Image for faster LCP (Largest Contentful Paint) -->
+    <link rel="preload" as="image" href="./img/Kipsa.jpg">
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload Critical Fonts -->
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap">
+    </noscript>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -47,7 +63,7 @@
 
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
     <style>
-        /* Import Google Fonts */
+        /* Import Google Fonts - Fallback/Standard import */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap');
 
         :root {
@@ -645,6 +661,9 @@
         .special-card-logo img {
             height: 50px;
             width: auto;
+            /* Added explicit width/height to CSS for CLS */
+            width: auto;
+            height: 100%;
         }
 
         .special-content {
