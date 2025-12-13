@@ -15,6 +15,7 @@
     <meta property="og:image" content="./img/Kipsa.jpg">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fi_FI">
+    <meta property="og:site_name" content="Kouvolan Grilli-Kipsa">
 
     <!-- Preload the Hero Background Image for faster LCP (Largest Contentful Paint) -->
     <link rel="preload" as="image" href="./img/Kipsa.jpg">
@@ -795,12 +796,17 @@
 
         .about-image {
             position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            /* Modern shadow */
+            border-radius: 12px;
+            /* Modern rounded corners */
             border: none;
             transition: none;
+            /* No hover animation */
             width: 100% !important;
             height: 250px !important;
+            overflow: hidden;
+            /* Keeps image inside the rounded corners */
         }
 
         /* Height fix for 2nd image */
