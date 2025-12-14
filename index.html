@@ -15,7 +15,7 @@
     <meta property="og:image" content="./img/Kipsa.jpg">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fi_FI">
-    <meta property="og:site_name" content="Kouvolan Grilli-Kipsa">
+    <meta property="og:site_name" content="Kouvolan Grilli Kipsa">
 
     <!-- Preload the Hero Background Image for faster LCP (Largest Contentful Paint) -->
     <link rel="preload" as="image" href="./img/Kipsa.jpg">
@@ -33,11 +33,12 @@
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;700&family=Oswald:wght@400;700&display=swap">
     </noscript>
 
+    <!-- Structured Data for Restaurant Info -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Restaurant",
-      "name": "Grilli Kipsa",
+      "name": "Kouvolan Grilli Kipsa",
       "image": "./img/Kipsa.jpg",
       "address": {
         "@type": "PostalAddress",
@@ -59,6 +60,17 @@
         { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:30", "closes": "02:00" },
         { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "13:00", "closes": "22:00" }
       ]
+    }
+    </script>
+
+    <!-- Structured Data specifically for Google Search Site Name -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kouvolan Grilli Kipsa",
+      "alternateName": ["Grilli Kipsa", "Kipsa"],
+      "url": "https://grilli-kipsa.fi/"
     }
     </script>
 
