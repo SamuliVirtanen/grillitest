@@ -50,16 +50,7 @@
       "telephone": "05 3121866",
       "email": "kouvolan.grillikipsa@gmail.com",
       "servesCuisine": "Grilliruoka",
-      "priceRange": "€",
-      "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "10:30", "closes": "22:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "10:30", "closes": "22:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "10:30", "closes": "22:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "10:30", "closes": "22:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "10:30", "closes": "02:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:30", "closes": "02:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "13:00", "closes": "22:00" }
-      ]
+      "priceRange": "€"
     }
     </script>
 
@@ -216,12 +207,22 @@
             border-radius: 20px;
         }
 
-        nav a:hover,
+        /* Separate active state */
         nav a.active-nav-link {
             color: var(--white);
             background-color: var(--primary-red);
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(204, 0, 0, 0.4);
+        }
+
+        /* Hover effect ONLY for devices that support hover (prevents sticky hover on mobile) */
+        @media (hover: hover) {
+            nav a:hover {
+                color: var(--white);
+                background-color: var(--primary-red);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(204, 0, 0, 0.4);
+            }
         }
 
         nav a.active-nav-link::after {
@@ -1756,7 +1757,12 @@
                 const headerHeight = header.offsetHeight || 70;
                 // --- MODIFIED: Simplified offset calculation ---
                 // We always want to land *below* the sticky header
-                return headerHeight + 20; // Height + buffer
+                let offset = headerHeight + 20; // Height + buffer
+                // Add extra buffer for mobile screens to fix scroll position
+                if (window.innerWidth < 768) {
+                    offset += 10;
+                }
+                return offset;
             }
 
             function easeInOutQuad(t, b, c, d) { t /= d / 2; if (t < 1) return c / 2 * t * t + b; t--; return -c / 2 * (t * (t - 2) - 1) + b; }
@@ -1814,24 +1820,32 @@
             });
 
             // --- Active Nav Link Highlighting ---
-            const highlightHeaderOffset = 100; // Fixed offset for highlighting
+            // Increased offset to detect sections earlier, fixing the mobile "stuck on previous section" issue
+            const highlightHeaderOffset = 150;
 
             function highlightNavLink() {
                 let currentSectionId = '';
                 const scrollPosition = window.pageYOffset;
+                // Calculate dynamic offset based on header height
+                const dynamicOffset = getHeaderOffset();
+
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - highlightHeaderOffset;
+                    // Use a more generous offset for detection so the link highlights *before* the section top hits the viewport top
+                    const sectionTop = section.offsetTop - dynamicOffset - 50;
                     const sectionHeight = section.offsetHeight;
                     if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                         currentSectionId = '#' + (section.tagName === 'FOOTER' ? 'contact' : section.getAttribute('id'));
                     }
                 });
-                if ((window.innerHeight + scrollPosition) >= document.body.offsetHeight - 10) {
+
+                // Bottom of page detection
+                if ((window.innerHeight + scrollPosition) >= document.body.offsetHeight - 50) {
                     const lastSection = sections[sections.length - 1];
                     if (lastSection) {
                         currentSectionId = '#' + (lastSection.tagName === 'FOOTER' ? 'contact' : lastSection.getAttribute('id'));
                     }
                 }
+
                 navLinks.forEach(link => {
                     link.classList.remove('active-nav-link');
                     if (link.getAttribute('href') === currentSectionId) {
