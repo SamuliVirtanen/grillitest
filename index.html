@@ -671,7 +671,7 @@
             background-color: #f9f9f9;
         }
 
-        /* Specials - Logo Larger */
+        /* Specials - Logo Larger, Inside Card */
         #specials {
             background-color: var(--off-white);
         }
@@ -696,39 +696,33 @@
             flex-direction: column;
             border-radius: 8px;
             position: relative;
-            margin-top: 60px;
+            margin-top: 0;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            /* Added internal padding */
+            padding-top: 2rem;
         }
 
         .special-card-logo {
-            position: absolute;
-            top: -60px;
-            /* Moved up */
-            left: 50%;
-            transform: translateX(-50%);
-            height: 120px;
-            /* Increased size */
-            width: 120px;
-            /* Increased size */
-            background: white;
-            border-radius: 50%;
-            padding: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: static;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #eee;
+            margin-bottom: 1rem;
+            width: 100%;
+            height: auto;
+            background: transparent;
+            box-shadow: none;
+            border: none;
         }
 
         .special-card-logo img {
-            height: 70px;
+            height: 80px;
             width: auto;
+            filter: none;
         }
 
-        /* Larger Logo */
-
         .special-content {
-            padding: 4rem 1.5rem 2rem 1.5rem;
+            padding: 0 1.5rem 2rem 1.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -1278,7 +1272,7 @@
                     <h3>Burgerit <span class="h3-subtext">(kokolihapihvillä)</span></h3>
                     <div class="category-note">
                         <div class="note-header">Hintaan sisältyy:</div>
-                        <div class="note-body">Perusmausteen + tuoresalaatti, tomaatti sekä majoneesi:</div>
+                        <div class="note-body">Perusmausteet + tuoresalaatti, tomaatti sekä majoneesi:</div>
                         <div class="mayo-list">
                             Amerikan, Valkosipuli, Chili, Kevyt, Curry, Tulinen chilikastike, Ranskalainen
                             salaattikastike, Mieto Kebabkastike
@@ -1315,7 +1309,7 @@
                     <h3>Hampurilaiset</h3>
                     <div class="category-note">
                         <div class="note-header">Hintaan sisältyy:</div>
-                        <div class="note-body">Perusmausteen + tuoresalaatti, tomaatti sekä majoneesi:</div>
+                        <div class="note-body">Perusmausteet + tuoresalaatti, tomaatti sekä majoneesi:</div>
                         <div class="mayo-list">
                             Amerikan, Valkosipuli, Chili, Kevyt, Curry, Tulinen chilikastike, Ranskalainen
                             salaattikastike, Mieto Kebabkastike
