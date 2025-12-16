@@ -72,7 +72,8 @@
             --primary-red: #cc0000;
             --primary-red-readable: #a00000;
             --secondary-black: #222222;
-            --light-grey: #f8f8f8;
+            --light-grey: #ebebeb;
+            /* Updated to requested background color */
             --off-white: #fdfdfd;
             --dark-grey: #555555;
             --white: #ffffff;
@@ -94,10 +95,73 @@
             margin: 0;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--light-grey);
+            /* Updated background color */
+            background-color: #ebebeb;
             overflow-x: hidden;
             /* Padding matches header height to prevent gap/jump */
             padding-top: var(--header-height);
+            /* Ensure positioning context for background elements if needed, 
+               though we use fixed for bg */
+            position: relative;
+        }
+
+        /* --- New Modern Background Elements --- */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            /* Dot pattern */
+            background-image: radial-gradient(#c7c2c2 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .shape-1 {
+            top: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background-color: rgba(233, 213, 255, 0.4);
+            /* soft purple */
+            mix-blend-mode: multiply;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            bottom: -10%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background-color: rgba(254, 215, 170, 0.4);
+            /* soft orange */
+            mix-blend-mode: multiply;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.25;
+                transform: scale(1.05);
+            }
         }
 
         /* --- Header Styling --- */
@@ -1032,6 +1096,11 @@
 </head>
 
 <body>
+
+    <!-- Modern Background Elements -->
+    <div class="bg-pattern"></div>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
 
     <!-- Overlay for Mobile Menu -->
     <div class="overlay" id="overlay"></div>
