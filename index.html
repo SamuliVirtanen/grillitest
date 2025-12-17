@@ -73,7 +73,6 @@
             --primary-red-readable: #a00000;
             --secondary-black: #222222;
             --light-grey: #ebebeb;
-            /* Updated to requested background color */
             --off-white: #fdfdfd;
             --dark-grey: #555555;
             --white: #ffffff;
@@ -95,17 +94,14 @@
             margin: 0;
             line-height: 1.6;
             color: var(--text-color);
-            /* Updated background color */
             background-color: #ebebeb;
             overflow-x: hidden;
             /* Padding matches header height to prevent gap/jump */
             padding-top: var(--header-height);
-            /* Ensure positioning context for background elements if needed, 
-               though we use fixed for bg */
             position: relative;
         }
 
-        /* --- New Modern Background Elements --- */
+        /* --- Modern Background Elements --- */
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -113,7 +109,6 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Dot pattern */
             background-image: radial-gradient(#c7c2c2 1.5px, transparent 1.5px);
             background-size: 24px 24px;
             opacity: 0.6;
@@ -127,6 +122,9 @@
             z-index: -1;
             opacity: 0.4;
             pointer-events: none;
+            /* Performance fix for zooming/scrolling */
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .shape-1 {
@@ -185,6 +183,11 @@
         header.scrolled {
             height: 80px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Mobile Menu Positioning Fix for Scrolled Desktop Header */
+        header.scrolled .mobile-menu {
+            top: 80px;
         }
 
         .header-container {
@@ -295,6 +298,21 @@
             padding: 0;
             z-index: 1001;
             margin-left: 1rem;
+            position: relative;
+            /* Context for hitbox */
+            -webkit-tap-highlight-color: transparent;
+            /* Remove blue highlight on tap */
+            outline: none;
+        }
+
+        /* Hamburger Touch Hitbox Expansion */
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
         }
 
         .hamburger span {
@@ -317,15 +335,13 @@
             transform: translateY(-9px) rotate(-45deg);
         }
 
-        /* Mobile Menu - Appear from below Navigation Bar using Clip Path */
+        /* Mobile Menu */
         .mobile-menu {
             position: fixed;
             top: var(--header-height);
-            /* Starts directly under header */
             left: 0;
             width: 100%;
             height: auto;
-            /* Auto height to fit content, not full screen */
             max-height: calc(100vh - var(--header-height));
             overflow-y: auto;
             background-color: var(--white);
@@ -335,20 +351,25 @@
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
+            /* Z-index 900 puts it behind header (1000) */
             z-index: 900;
-            /* Must be lower than header (1000) */
             border-bottom: 3px solid var(--primary-red);
 
-            /* Logic: "Unroll" from the header */
-            clip-path: inset(0 0 100% 0);
+            /* Smoother Animation using Transform instead of clip-path */
+            transform: translateY(-100%);
+            opacity: 0;
             visibility: hidden;
-            transition: clip-path 0.5s ease-in-out, visibility 0s 0.5s;
+            /* Added top transition to smoothly close gap on scroll */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease, visibility 0s 0.4s, top 0.3s ease;
+            pointer-events: none;
         }
 
         .mobile-menu.active {
-            clip-path: inset(0 0 0 0);
+            transform: translateY(0);
+            opacity: 1;
             visibility: visible;
-            transition: clip-path 0.5s ease-in-out, visibility 0s 0s;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease, visibility 0s 0s, top 0.3s ease;
+            pointer-events: auto;
         }
 
         .mobile-menu a {
@@ -356,11 +377,9 @@
             color: var(--nav-text-color);
             font-family: 'Oswald', sans-serif;
             font-size: 1.1rem;
-            /* Smaller font size as requested */
             text-transform: uppercase;
             font-weight: 600;
             position: relative;
-            /* For underline */
             padding: 5px 0;
 
             /* Staggered Item Animation */
@@ -374,7 +393,7 @@
             transform: translateY(0);
         }
 
-        /* Staggered Delay for drop-down items */
+        /* Staggered Delay */
         .mobile-menu.active a:nth-child(1) {
             transition-delay: 0.1s;
         }
@@ -395,7 +414,11 @@
             transition-delay: 0.3s;
         }
 
-        /* Mobile Menu Link Hover & Active State (Same as Desktop) */
+        .mobile-menu a:hover,
+        .mobile-menu a.active-nav-link {
+            color: var(--primary-red);
+        }
+
         .mobile-menu a::after {
             content: '';
             position: absolute;
@@ -407,11 +430,6 @@
             transform: scaleX(0);
             transform-origin: center;
             transition: transform 0.3s ease-in-out;
-        }
-
-        .mobile-menu a:hover,
-        .mobile-menu a.active-nav-link {
-            color: var(--primary-red);
         }
 
         .mobile-menu a:hover::after,
@@ -431,7 +449,6 @@
             visibility: hidden;
             transition: opacity 0.3s ease;
             z-index: 800;
-            /* Lower than menu */
         }
 
         .overlay.active {
@@ -448,9 +465,9 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            /* Default for desktop */
             color: var(--white);
             text-align: center;
-            /* Increased Height */
             min-height: 80vh;
             display: flex;
             flex-direction: column;
@@ -461,7 +478,6 @@
             z-index: 10;
             clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
             margin-bottom: -2rem;
-            /* Remove margin to ensure it touches navbar (body padding handles offset) */
             margin-top: 0;
         }
 
@@ -478,8 +494,7 @@
 
         /* General Section Styling */
         section {
-            /* Reduced Padding */
-            padding: 2.5rem 1.5rem;
+            padding: 0rem 1.5rem;
             max-width: 1200px;
             margin: 0 auto 3rem auto;
             background-color: var(--white);
@@ -507,7 +522,6 @@
             color: var(--secondary-black);
             font-size: 3em;
             text-align: center;
-            /* Reduced Margin */
             margin-bottom: 1.5rem;
             position: relative;
             letter-spacing: 1px;
@@ -579,6 +593,8 @@
             border-left: 5px solid var(--primary-red);
             padding-left: 1rem;
             padding-bottom: 0.5rem;
+            padding-top: 0.5rem;
+            background: linear-gradient(to right, #ededed45, transparent);
         }
 
         .menu-category h3 .h3-subtext {
@@ -588,6 +604,7 @@
             text-transform: none;
             margin-left: 10px;
             font-family: 'Montserrat', sans-serif;
+            vertical-align: middle;
         }
 
         .category-note {
@@ -670,7 +687,6 @@
             border-top: 5px solid var(--primary-red);
             text-align: left;
             background-color: var(--white);
-            /* Remove section padding so header touches edges */
             padding: 0;
         }
 
@@ -762,7 +778,6 @@
             position: relative;
             margin-top: 0;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            /* Added internal padding */
             padding-top: 2rem;
         }
 
@@ -875,22 +890,6 @@
             object-fit: cover;
         }
 
-        /* Scroll Reveal */
-        .menu-container,
-        .lunch-box-content,
-        .specials-container,
-        .about-content,
-        .footer-content-wrapper {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-
         /* Footer */
         footer {
             background-color: var(--secondary-black);
@@ -994,11 +993,22 @@
         /* Responsive */
         @media (max-width: 992px) {
             :root {
-                --header-height: 80px;
+                /* Start with a larger header on mobile, matching desktop feel */
+                --header-height: 90px;
             }
 
             header {
                 padding: 0.5rem 1.5rem;
+            }
+
+            /* Enable shrinkage on scroll for mobile too */
+            header.scrolled {
+                height: 70px;
+            }
+
+            /* Fix Mobile Menu top on scroll for tablets/larger mobiles */
+            header.scrolled .mobile-menu {
+                top: 70px;
             }
 
             .desktop-nav {
@@ -1009,8 +1019,13 @@
                 display: flex;
             }
 
+            /* Scale logo based on scroll state */
             .nav-logo {
-                height: 50px;
+                height: 55px;
+            }
+
+            header.scrolled .nav-logo {
+                height: 45px;
             }
 
             .header-hours {
@@ -1022,11 +1037,27 @@
             .hours-time {
                 font-size: 0.9rem;
             }
+
+            /* Performance Fix: Disable fixed background attachment on mobile to prevent scroll lag */
+            .hero {
+                background-attachment: scroll;
+            }
         }
 
         @media (max-width: 767px) {
+
+            /* Keep the same logic for smaller phones */
             :root {
-                --header-height: 70px;
+                --header-height: 80px;
+            }
+
+            header.scrolled {
+                height: 65px;
+            }
+
+            /* Fix Mobile Menu top on scroll for smaller mobiles */
+            header.scrolled .mobile-menu {
+                top: 65px;
             }
 
             .hero h1 {
@@ -1063,6 +1094,10 @@
             }
 
             .nav-logo {
+                height: 50px;
+            }
+
+            header.scrolled .nav-logo {
                 height: 40px;
             }
 
@@ -1079,7 +1114,6 @@
                 font-size: 0.85rem;
             }
 
-            /* Update mobile menu padding if needed */
             .mobile-menu {
                 padding: 1.5rem 0;
             }
@@ -1569,7 +1603,7 @@
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                     </ul>
-                    <div class="special-price"> 8,80€ </div>
+                    <div class="special-price"> 8,90€ </div>
                 </div>
             </div>
             <div class="special-item-card">
@@ -1832,19 +1866,6 @@
                 });
             }
             window.addEventListener('scroll', highlightNavLink);
-
-            // --- Scroll Reveal ---
-            const revealElements = document.querySelectorAll('.menu-container, .lunch-box-content, .specials-container, .about-content, .footer-content-wrapper');
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            revealElements.forEach(el => revealObserver.observe(el));
 
             // --- Opening Hours Fetch ---
             async function fetchOpeningHours() {
