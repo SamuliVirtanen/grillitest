@@ -72,7 +72,7 @@
             --primary-red: #cc0000;
             --primary-red-readable: #a00000;
             --secondary-black: #222222;
-            --light-grey: #ebebeb;
+            --light-grey: #f5f5f5;
             --off-white: #fdfdfd;
             --dark-grey: #555555;
             --white: #ffffff;
@@ -94,7 +94,7 @@
             margin: 0;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: #ebebeb;
+            background-color: #f5f5f5;
             overflow-x: hidden;
             /* Padding matches header height to prevent gap/jump */
             padding-top: var(--header-height);
@@ -494,7 +494,7 @@
 
         /* General Section Styling */
         section {
-            padding: 0rem 1.5rem;
+            padding: 0rem 1.5rem 3rem 1.5rem;
             max-width: 1200px;
             margin: 0 auto 3rem auto;
             background-color: var(--white);
@@ -1119,6 +1119,34 @@
             }
         }
 
+        /* Fix for very small screens (< 420px) to prevent burger menu overlapping */
+        @media (max-width: 420px) {
+            .logo-area {
+                gap: 0.5rem;
+            }
+
+            .header-hours {
+                padding-left: 0.5rem;
+                font-size: 0.6rem;
+            }
+
+            .hours-label {
+                font-size: 0.6rem;
+            }
+
+            .hours-time {
+                font-size: 0.75rem;
+            }
+
+            .nav-logo {
+                height: 35px;
+            }
+
+            header.scrolled .nav-logo {
+                height: 30px;
+            }
+        }
+
         @media (min-width: 993px) {
 
             .mobile-menu,
@@ -1603,7 +1631,7 @@
                     <ul class="special-ingredients">
                         <li>sinappi, ketsuppi, kurkku ja sipuli</li>
                     </ul>
-                    <div class="special-price"> 8,90€ </div>
+                    <div class="special-price"> 8,80€ </div>
                 </div>
             </div>
             <div class="special-item-card">
@@ -1799,7 +1827,7 @@
                 });
             });
 
-            // --- Enhanced Smooth Scroll (Restored from previous version) ---
+            // --- Enhanced Smooth Scroll ---
             function easeInOutQuad(t, b, c, d) {
                 t /= d / 2;
                 if (t < 1) return c / 2 * t * t + b;
